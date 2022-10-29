@@ -48,8 +48,8 @@ final class AppController {
     // MARK: - Notifications
     @objc private func handleAppState() {
         if let user = Auth.auth().currentUser {
-//            let channelsViewController = ChannelsViewController(currentUser: user)
-//            rootViewController = NavigationController(channelsViewController)
+            let channelsViewController = ChannelsViewController(currentUser: user)
+            rootViewController = NavigationController(channelsViewController)
         } else {
             rootViewController = LoginViewController()
         }
