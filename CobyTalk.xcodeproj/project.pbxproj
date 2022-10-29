@@ -9,21 +9,41 @@
 /* Begin PBXBuildFile section */
 		CBABD0F7290D8847000FB02A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD0F6290D8847000FB02A /* AppDelegate.swift */; };
 		CBABD0F9290D8847000FB02A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD0F8290D8847000FB02A /* SceneDelegate.swift */; };
-		CBABD0FB290D8847000FB02A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD0FA290D8847000FB02A /* ViewController.swift */; };
-		CBABD0FE290D8847000FB02A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBABD0FC290D8847000FB02A /* Main.storyboard */; };
+		CBABD0FB290D8847000FB02A /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD0FA290D8847000FB02A /* ChatViewController.swift */; };
 		CBABD100290D8849000FB02A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBABD0FF290D8849000FB02A /* Assets.xcassets */; };
 		CBABD103290D8849000FB02A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBABD101290D8849000FB02A /* LaunchScreen.storyboard */; };
+		CBABD10C290D88B4000FB02A /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = CBABD10B290D88B4000FB02A /* MessageKit */; };
+		CBABD10F290D8926000FB02A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CBABD10E290D8926000FB02A /* FirebaseAuth */; };
+		CBABD111290D8926000FB02A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CBABD110290D8926000FB02A /* FirebaseFirestore */; };
+		CBABD113290D8926000FB02A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CBABD112290D8926000FB02A /* FirebaseStorage */; };
+		CBABD11C290D8A8F000FB02A /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD11B290D8A8F000FB02A /* AppController.swift */; };
+		CBABD11E290D8AA8000FB02A /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD11D290D8AA8000FB02A /* AppSettings.swift */; };
+		CBABD122290D8AE9000FB02A /* UICollectionView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD121290D8AE9000FB02A /* UICollectionView+Additions.swift */; };
+		CBABD124290D8B16000FB02A /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD123290D8B16000FB02A /* UIColor+Additions.swift */; };
+		CBABD126290D8B42000FB02A /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD125290D8B42000FB02A /* UIImage+Additions.swift */; };
+		CBABD128290D8B52000FB02A /* UIView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD127290D8B52000FB02A /* UIView+Additions.swift */; };
+		CBABD12B290D8B9F000FB02A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD12A290D8B9F000FB02A /* LoginViewController.swift */; };
+		CBABD12D290D8BAF000FB02A /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD12C290D8BAF000FB02A /* ChannelsViewController.swift */; };
+		CBABD133290D8DD1000FB02A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CBABD132290D8DD1000FB02A /* SnapKit */; };
+		CBABD136290D8EDF000FB02A /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = CBABD135290D8EDF000FB02A /* Then */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CBABD0F3290D8847000FB02A /* CobyTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CobyTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBABD0F6290D8847000FB02A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CBABD0F8290D8847000FB02A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CBABD0FA290D8847000FB02A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CBABD0FD290D8847000FB02A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CBABD0FA290D8847000FB02A /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		CBABD0FF290D8849000FB02A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CBABD102290D8849000FB02A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CBABD104290D8849000FB02A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBABD11B290D8A8F000FB02A /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
+		CBABD11D290D8AA8000FB02A /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		CBABD121290D8AE9000FB02A /* UICollectionView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Additions.swift"; sourceTree = "<group>"; };
+		CBABD123290D8B16000FB02A /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
+		CBABD125290D8B42000FB02A /* UIImage+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Additions.swift"; sourceTree = "<group>"; };
+		CBABD127290D8B52000FB02A /* UIView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Additions.swift"; sourceTree = "<group>"; };
+		CBABD12A290D8B9F000FB02A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CBABD12C290D8BAF000FB02A /* ChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +51,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBABD10C290D88B4000FB02A /* MessageKit in Frameworks */,
+				CBABD136290D8EDF000FB02A /* Then in Frameworks */,
+				CBABD113290D8926000FB02A /* FirebaseStorage in Frameworks */,
+				CBABD133290D8DD1000FB02A /* SnapKit in Frameworks */,
+				CBABD10F290D8926000FB02A /* FirebaseAuth in Frameworks */,
+				CBABD111290D8926000FB02A /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +68,7 @@
 			children = (
 				CBABD0F5290D8847000FB02A /* CobyTalk */,
 				CBABD0F4290D8847000FB02A /* Products */,
+				CBABD134290D8EDF000FB02A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +83,109 @@
 		CBABD0F5290D8847000FB02A /* CobyTalk */ = {
 			isa = PBXGroup;
 			children = (
-				CBABD0F6290D8847000FB02A /* AppDelegate.swift */,
-				CBABD0F8290D8847000FB02A /* SceneDelegate.swift */,
-				CBABD0FA290D8847000FB02A /* ViewController.swift */,
-				CBABD0FC290D8847000FB02A /* Main.storyboard */,
-				CBABD0FF290D8849000FB02A /* Assets.xcassets */,
-				CBABD101290D8849000FB02A /* LaunchScreen.storyboard */,
-				CBABD104290D8849000FB02A /* Info.plist */,
+				CBABD116290D8966000FB02A /* Network */,
+				CBABD114290D894E000FB02A /* Global */,
+				CBABD115290D8954000FB02A /* Screens */,
 			);
 			path = CobyTalk;
+			sourceTree = "<group>";
+		};
+		CBABD114290D894E000FB02A /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				CBABD11A290D89FB000FB02A /* Supports */,
+				CBABD119290D89F4000FB02A /* Resource */,
+				CBABD118290D89A9000FB02A /* Extensions */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		CBABD115290D8954000FB02A /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				CBABD11F290D8AC8000FB02A /* Login */,
+				CBABD120290D8AD1000FB02A /* Channels */,
+				CBABD129290D8B83000FB02A /* Chat */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		CBABD116290D8966000FB02A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CBABD117290D8975000FB02A /* Models */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		CBABD117290D8975000FB02A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CBABD118290D89A9000FB02A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CBABD121290D8AE9000FB02A /* UICollectionView+Additions.swift */,
+				CBABD123290D8B16000FB02A /* UIColor+Additions.swift */,
+				CBABD125290D8B42000FB02A /* UIImage+Additions.swift */,
+				CBABD127290D8B52000FB02A /* UIView+Additions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CBABD119290D89F4000FB02A /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				CBABD0FF290D8849000FB02A /* Assets.xcassets */,
+				CBABD101290D8849000FB02A /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		CBABD11A290D89FB000FB02A /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				CBABD0F6290D8847000FB02A /* AppDelegate.swift */,
+				CBABD0F8290D8847000FB02A /* SceneDelegate.swift */,
+				CBABD11B290D8A8F000FB02A /* AppController.swift */,
+				CBABD11D290D8AA8000FB02A /* AppSettings.swift */,
+				CBABD104290D8849000FB02A /* Info.plist */,
+			);
+			path = Supports;
+			sourceTree = "<group>";
+		};
+		CBABD11F290D8AC8000FB02A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CBABD12A290D8B9F000FB02A /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		CBABD120290D8AD1000FB02A /* Channels */ = {
+			isa = PBXGroup;
+			children = (
+				CBABD12C290D8BAF000FB02A /* ChannelsViewController.swift */,
+			);
+			path = Channels;
+			sourceTree = "<group>";
+		};
+		CBABD129290D8B83000FB02A /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				CBABD0FA290D8847000FB02A /* ChatViewController.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		CBABD134290D8EDF000FB02A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +204,14 @@
 			dependencies = (
 			);
 			name = CobyTalk;
+			packageProductDependencies = (
+				CBABD10B290D88B4000FB02A /* MessageKit */,
+				CBABD10E290D8926000FB02A /* FirebaseAuth */,
+				CBABD110290D8926000FB02A /* FirebaseFirestore */,
+				CBABD112290D8926000FB02A /* FirebaseStorage */,
+				CBABD132290D8DD1000FB02A /* SnapKit */,
+				CBABD135290D8EDF000FB02A /* Then */,
+			);
 			productName = CobyTalk;
 			productReference = CBABD0F3290D8847000FB02A /* CobyTalk.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +240,12 @@
 				Base,
 			);
 			mainGroup = CBABD0EA290D8847000FB02A;
+			packageReferences = (
+				CBABD10A290D88B4000FB02A /* XCRemoteSwiftPackageReference "MessageKit" */,
+				CBABD10D290D8926000FB02A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CBABD12E290D8D92000FB02A /* XCRemoteSwiftPackageReference "Then" */,
+				CBABD131290D8DD1000FB02A /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = CBABD0F4290D8847000FB02A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +262,6 @@
 			files = (
 				CBABD103290D8849000FB02A /* LaunchScreen.storyboard in Resources */,
 				CBABD100290D8849000FB02A /* Assets.xcassets in Resources */,
-				CBABD0FE290D8847000FB02A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +272,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBABD0FB290D8847000FB02A /* ViewController.swift in Sources */,
+				CBABD128290D8B52000FB02A /* UIView+Additions.swift in Sources */,
+				CBABD0FB290D8847000FB02A /* ChatViewController.swift in Sources */,
 				CBABD0F7290D8847000FB02A /* AppDelegate.swift in Sources */,
+				CBABD122290D8AE9000FB02A /* UICollectionView+Additions.swift in Sources */,
 				CBABD0F9290D8847000FB02A /* SceneDelegate.swift in Sources */,
+				CBABD12D290D8BAF000FB02A /* ChannelsViewController.swift in Sources */,
+				CBABD11E290D8AA8000FB02A /* AppSettings.swift in Sources */,
+				CBABD126290D8B42000FB02A /* UIImage+Additions.swift in Sources */,
+				CBABD11C290D8A8F000FB02A /* AppController.swift in Sources */,
+				CBABD12B290D8B9F000FB02A /* LoginViewController.swift in Sources */,
+				CBABD124290D8B16000FB02A /* UIColor+Additions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CBABD0FC290D8847000FB02A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CBABD0FD290D8847000FB02A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CBABD101290D8849000FB02A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,12 +423,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CobyTalk/Info.plist;
+				INFOPLIST_FILE = CobyTalk/Global/Supports/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -317,12 +452,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CobyTalk/Info.plist;
+				INFOPLIST_FILE = CobyTalk/Global/Supports/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -358,6 +494,74 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CBABD10A290D88B4000FB02A /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		CBABD10D290D8926000FB02A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		CBABD12E290D8D92000FB02A /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		CBABD131290D8DD1000FB02A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CBABD10B290D88B4000FB02A /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBABD10A290D88B4000FB02A /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
+		};
+		CBABD10E290D8926000FB02A /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBABD10D290D8926000FB02A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		CBABD110290D8926000FB02A /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBABD10D290D8926000FB02A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		CBABD112290D8926000FB02A /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBABD10D290D8926000FB02A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		CBABD132290D8DD1000FB02A /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBABD131290D8DD1000FB02A /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		CBABD135290D8EDF000FB02A /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBABD12E290D8D92000FB02A /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CBABD0EB290D8847000FB02A /* Project object */;
 }
