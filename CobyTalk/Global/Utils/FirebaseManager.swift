@@ -181,4 +181,26 @@ final class FirebaseManager {
         
         print("Success to make friend")
     }
+    
+    func getChannels() async -> [Channel]? {
+        guard let userId = FirebaseManager.auth.currentUser?.uid else { return nil }
+        do {
+            var channels = [Channel]()
+            
+            let documentsSnapshot = try await FirebaseManager.store.collection("users").getDocuments()
+            
+            documentsSnapshot.documents.forEach({ snapshot in
+                guard let user = try? snapshot.data(as: User.self) else { return }
+                if user.uid != userId {
+                    channels.append(Channel(name: user.name))
+                }
+            })
+            
+            print("Success get channels")
+            return channels
+        } catch {
+            print("Get Users error")
+            return nil
+        }
+    }
 }

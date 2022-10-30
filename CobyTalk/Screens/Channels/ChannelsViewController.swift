@@ -14,7 +14,7 @@ final class ChannelsViewController: BaseViewController {
     
     // MARK: - property
     
-    lazy var channelTableView = UITableView().then {
+    private lazy var channelTableView = UITableView().then {
         $0.register(ChannelTableViewCell.self, forCellReuseIdentifier: ChannelTableViewCell.className)
         $0.delegate = self
         $0.dataSource = self
@@ -22,8 +22,8 @@ final class ChannelsViewController: BaseViewController {
         $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
-    var channels = [Channel]()
-    var currentUser: User?
+    private var channels: [Channel]?
+    private var currentUser: User?
     
     // MARK: - func
     
@@ -36,6 +36,10 @@ final class ChannelsViewController: BaseViewController {
         Task { [weak self] in
             guard let user = await FirebaseManager.shared.getUser() else { return }
             self?.currentUser = user
+            self?.channels = await FirebaseManager.shared.getChannels()
+            DispatchQueue.main.async {
+                self?.channelTableView.reloadData()
+            }
         }
     }
     
@@ -52,14 +56,17 @@ final class ChannelsViewController: BaseViewController {
 
 extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return channels.count
+        guard channels != nil else { return 0 }
+        return channels?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ChannelTableViewCell.className, for: indexPath) as! ChannelTableViewCell
         
+        guard channels != nil else { return cell }
+        
         cell.selectionStyle = . none
-        cell.chatUserNameLabel.text = channels[indexPath.row].name
+        cell.chatUserNameLabel.text = channels?[indexPath.row].name
         return cell
     }
     
@@ -68,8 +75,9 @@ extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let channel = channels[indexPath.row]
-        let viewController = ChatViewController(user: currentUser!, channel: channel)
+        guard channels != nil else { return }
+        let channel = channels?[indexPath.row]
+        let viewController = ChatViewController(user: currentUser!, channel: channel!)
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }
