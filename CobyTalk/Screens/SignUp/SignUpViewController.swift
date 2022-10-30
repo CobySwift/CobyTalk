@@ -119,7 +119,7 @@ final class SignUpViewController: BaseViewController {
             return
         }
         
-        Task { [weak self] in
+        Task {
             await FirebaseManager.shared.createNewAccount(email: email, password: password)
             await FirebaseManager.shared.storeUserInformation(email: email, name: name)
         }

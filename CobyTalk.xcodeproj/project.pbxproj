@@ -32,7 +32,6 @@
 		CBABD111290D8926000FB02A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CBABD110290D8926000FB02A /* FirebaseFirestore */; };
 		CBABD113290D8926000FB02A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CBABD112290D8926000FB02A /* FirebaseStorage */; };
 		CBABD11C290D8A8F000FB02A /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD11B290D8A8F000FB02A /* AppController.swift */; };
-		CBABD11E290D8AA8000FB02A /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD11D290D8AA8000FB02A /* AppSettings.swift */; };
 		CBABD122290D8AE9000FB02A /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD121290D8AE9000FB02A /* UICollectionView+Extension.swift */; };
 		CBABD124290D8B16000FB02A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD123290D8B16000FB02A /* UIColor+Extension.swift */; };
 		CBABD126290D8B42000FB02A /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD125290D8B42000FB02A /* UIImage+Extension.swift */; };
@@ -73,7 +72,6 @@
 		CBABD102290D8849000FB02A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CBABD104290D8849000FB02A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBABD11B290D8A8F000FB02A /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
-		CBABD11D290D8AA8000FB02A /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		CBABD121290D8AE9000FB02A /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		CBABD123290D8B16000FB02A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		CBABD125290D8B42000FB02A /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 				CBABD0F6290D8847000FB02A /* AppDelegate.swift */,
 				CBABD0F8290D8847000FB02A /* SceneDelegate.swift */,
 				CBABD11B290D8A8F000FB02A /* AppController.swift */,
-				CBABD11D290D8AA8000FB02A /* AppSettings.swift */,
 				CBABD104290D8849000FB02A /* Info.plist */,
 				CBB744E8290D9353007ACB63 /* GoogleService-Info.plist */,
 			);
@@ -414,7 +411,6 @@
 				CBB744F6290DA4C3007ACB63 /* DatabaseRepresentation.swift in Sources */,
 				CB87BCD0290E63B200485216 /* PushNotificationSender.swift in Sources */,
 				CB87BCD3290E640D00485216 /* SignUpViewController.swift in Sources */,
-				CBABD11E290D8AA8000FB02A /* AppSettings.swift in Sources */,
 				CBB744EF290DA412007ACB63 /* Sender.swift in Sources */,
 				CB87BCC3290E629C00485216 /* NSObject+Extension.swift in Sources */,
 				CB87BCC9290E635300485216 /* UILabel+Extension.swift in Sources */,

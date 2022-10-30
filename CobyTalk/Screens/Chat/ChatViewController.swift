@@ -287,7 +287,7 @@ extension ChatViewController: MessagesLayoutDelegate {
 // MARK: - MessagesDataSource
 extension ChatViewController: MessagesDataSource {
     var currentSender: MessageKit.SenderType {
-        return Sender(senderId: user.uid, displayName: AppSettings.displayName)
+        return Sender(senderId: user.uid, displayName: user.name)
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {

@@ -31,14 +31,14 @@ struct Message: MessageType {
     var downloadURL: URL?
     
     init(user: User, content: String) {
-        sender = Sender(senderId: user.uid, displayName: AppSettings.displayName)
+        sender = Sender(senderId: user.uid, displayName: user.name)
         self.content = content
         sentDate = Date()
         id = nil
     }
     
     init(user: User, image: UIImage) {
-        sender = Sender(senderId: user.uid, displayName: AppSettings.displayName)
+        sender = Sender(senderId: user.uid, displayName: user.name)
         self.image = image
         content = ""
         sentDate = Date()
