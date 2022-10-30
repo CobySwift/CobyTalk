@@ -10,7 +10,7 @@ import Firebase
 
 final class AppController {
     static let shared = AppController()
-    // swiftlint:disable:next implicitly_unwrapped_optional
+    
     private var window: UIWindow!
     private var rootViewController: UIViewController? {
         didSet {
@@ -47,11 +47,10 @@ final class AppController {
     
     // MARK: - Notifications
     @objc private func handleAppState() {
-        if let user = Auth.auth().currentUser {
-            let channelsViewController = ChannelsViewController(currentUser: user)
-            rootViewController = NavigationController(channelsViewController)
+        if Auth.auth().currentUser != nil {
+            rootViewController = UINavigationController(rootViewController: ChannelsViewController())
         } else {
-            rootViewController = LoginViewController()
+            rootViewController = UINavigationController(rootViewController: LogInViewController())
         }
     }
 }

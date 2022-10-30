@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB87BCBB290E61C500485216 /* ImageLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCBA290E61C500485216 /* ImageLiteral.swift */; };
+		CB87BCBD290E61E000485216 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCBC290E61E000485216 /* BaseViewController.swift */; };
+		CB87BCBF290E61F000485216 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCBE290E61F000485216 /* BaseCollectionViewCell.swift */; };
+		CB87BCC1290E61FF00485216 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCC0290E61FF00485216 /* BaseTableViewCell.swift */; };
+		CB87BCC3290E629C00485216 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCC2290E629C00485216 /* NSObject+Extension.swift */; };
+		CB87BCC5290E62AE00485216 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCC4290E62AE00485216 /* UITableView+Extension.swift */; };
+		CB87BCC7290E62C100485216 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCC6290E62C100485216 /* UIViewController+Extension.swift */; };
+		CB87BCC9290E635300485216 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCC8290E635300485216 /* UILabel+Extension.swift */; };
+		CB87BCCB290E638800485216 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCCA290E638800485216 /* BackButton.swift */; };
+		CB87BCCE290E63A200485216 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCCD290E63A200485216 /* Logger.swift */; };
+		CB87BCD0290E63B200485216 /* PushNotificationSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCCF290E63B200485216 /* PushNotificationSender.swift */; };
+		CB87BCD3290E640D00485216 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCD2290E640D00485216 /* SignUpViewController.swift */; };
+		CB87BCD5290E646D00485216 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCD4290E646D00485216 /* FirebaseManager.swift */; };
+		CB87BCD7290E649100485216 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCD6290E649100485216 /* User.swift */; };
+		CB87BCD9290E685400485216 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CB87BCD8290E685400485216 /* FirebaseFirestoreSwift */; };
 		CBABD0F7290D8847000FB02A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD0F6290D8847000FB02A /* AppDelegate.swift */; };
 		CBABD0F9290D8847000FB02A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD0F8290D8847000FB02A /* SceneDelegate.swift */; };
 		CBABD0FB290D8847000FB02A /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD0FA290D8847000FB02A /* ChatViewController.swift */; };
@@ -18,11 +33,11 @@
 		CBABD113290D8926000FB02A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CBABD112290D8926000FB02A /* FirebaseStorage */; };
 		CBABD11C290D8A8F000FB02A /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD11B290D8A8F000FB02A /* AppController.swift */; };
 		CBABD11E290D8AA8000FB02A /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD11D290D8AA8000FB02A /* AppSettings.swift */; };
-		CBABD122290D8AE9000FB02A /* UICollectionView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD121290D8AE9000FB02A /* UICollectionView+Additions.swift */; };
-		CBABD124290D8B16000FB02A /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD123290D8B16000FB02A /* UIColor+Additions.swift */; };
-		CBABD126290D8B42000FB02A /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD125290D8B42000FB02A /* UIImage+Additions.swift */; };
-		CBABD128290D8B52000FB02A /* UIView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD127290D8B52000FB02A /* UIView+Additions.swift */; };
-		CBABD12B290D8B9F000FB02A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD12A290D8B9F000FB02A /* LoginViewController.swift */; };
+		CBABD122290D8AE9000FB02A /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD121290D8AE9000FB02A /* UICollectionView+Extension.swift */; };
+		CBABD124290D8B16000FB02A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD123290D8B16000FB02A /* UIColor+Extension.swift */; };
+		CBABD126290D8B42000FB02A /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD125290D8B42000FB02A /* UIImage+Extension.swift */; };
+		CBABD128290D8B52000FB02A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD127290D8B52000FB02A /* UIView+Extension.swift */; };
+		CBABD12B290D8B9F000FB02A /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD12A290D8B9F000FB02A /* LogInViewController.swift */; };
 		CBABD12D290D8BAF000FB02A /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABD12C290D8BAF000FB02A /* ChannelsViewController.swift */; };
 		CBABD133290D8DD1000FB02A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CBABD132290D8DD1000FB02A /* SnapKit */; };
 		CBABD136290D8EDF000FB02A /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = CBABD135290D8EDF000FB02A /* Then */; };
@@ -30,12 +45,26 @@
 		CBB744EB290DA3DA007ACB63 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB744EA290DA3DA007ACB63 /* Channel.swift */; };
 		CBB744ED290DA3F8007ACB63 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB744EC290DA3F8007ACB63 /* Message.swift */; };
 		CBB744EF290DA412007ACB63 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB744EE290DA412007ACB63 /* Sender.swift */; };
-		CBB744F2290DA479007ACB63 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB744F1290DA479007ACB63 /* NavigationController.swift */; };
 		CBB744F4290DA4AE007ACB63 /* ImageMediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB744F3290DA4AE007ACB63 /* ImageMediaItem.swift */; };
 		CBB744F6290DA4C3007ACB63 /* DatabaseRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB744F5290DA4C3007ACB63 /* DatabaseRepresentation.swift */; };
+		CBBB2062290E6E13004128BE /* ChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2061290E6E13004128BE /* ChannelTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB87BCBA290E61C500485216 /* ImageLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiteral.swift; sourceTree = "<group>"; };
+		CB87BCBC290E61E000485216 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		CB87BCBE290E61F000485216 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		CB87BCC0290E61FF00485216 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		CB87BCC2290E629C00485216 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		CB87BCC4290E62AE00485216 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		CB87BCC6290E62C100485216 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		CB87BCC8290E635300485216 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		CB87BCCA290E638800485216 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		CB87BCCD290E63A200485216 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		CB87BCCF290E63B200485216 /* PushNotificationSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationSender.swift; sourceTree = "<group>"; };
+		CB87BCD2290E640D00485216 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		CB87BCD4290E646D00485216 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		CB87BCD6290E649100485216 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CBABD0F3290D8847000FB02A /* CobyTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CobyTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBABD0F6290D8847000FB02A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CBABD0F8290D8847000FB02A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,19 +74,19 @@
 		CBABD104290D8849000FB02A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBABD11B290D8A8F000FB02A /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		CBABD11D290D8AA8000FB02A /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
-		CBABD121290D8AE9000FB02A /* UICollectionView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Additions.swift"; sourceTree = "<group>"; };
-		CBABD123290D8B16000FB02A /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
-		CBABD125290D8B42000FB02A /* UIImage+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Additions.swift"; sourceTree = "<group>"; };
-		CBABD127290D8B52000FB02A /* UIView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Additions.swift"; sourceTree = "<group>"; };
-		CBABD12A290D8B9F000FB02A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CBABD121290D8AE9000FB02A /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		CBABD123290D8B16000FB02A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		CBABD125290D8B42000FB02A /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		CBABD127290D8B52000FB02A /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		CBABD12A290D8B9F000FB02A /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		CBABD12C290D8BAF000FB02A /* ChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
 		CBB744E8290D9353007ACB63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CBB744EA290DA3DA007ACB63 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		CBB744EC290DA3F8007ACB63 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CBB744EE290DA412007ACB63 /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
-		CBB744F1290DA479007ACB63 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		CBB744F3290DA4AE007ACB63 /* ImageMediaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMediaItem.swift; sourceTree = "<group>"; };
 		CBB744F5290DA4C3007ACB63 /* DatabaseRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseRepresentation.swift; sourceTree = "<group>"; };
+		CBBB2061290E6E13004128BE /* ChannelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +97,7 @@
 				CBABD10C290D88B4000FB02A /* MessageKit in Frameworks */,
 				CBABD136290D8EDF000FB02A /* Then in Frameworks */,
 				CBABD113290D8926000FB02A /* FirebaseStorage in Frameworks */,
+				CB87BCD9290E685400485216 /* FirebaseFirestoreSwift in Frameworks */,
 				CBABD133290D8DD1000FB02A /* SnapKit in Frameworks */,
 				CBABD10F290D8926000FB02A /* FirebaseAuth in Frameworks */,
 				CBABD111290D8926000FB02A /* FirebaseFirestore in Frameworks */,
@@ -77,6 +107,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CB87BCB6290E619000485216 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				CB87BCBC290E61E000485216 /* BaseViewController.swift */,
+				CB87BCBE290E61F000485216 /* BaseCollectionViewCell.swift */,
+				CB87BCC0290E61FF00485216 /* BaseTableViewCell.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		CB87BCB7290E619400485216 /* Literal */ = {
+			isa = PBXGroup;
+			children = (
+				CB87BCBA290E61C500485216 /* ImageLiteral.swift */,
+			);
+			path = Literal;
+			sourceTree = "<group>";
+		};
+		CB87BCB8290E61A400485216 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				CB87BCCA290E638800485216 /* BackButton.swift */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		CB87BCB9290E61AF00485216 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		CB87BCCC290E639700485216 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CB87BCCD290E63A200485216 /* Logger.swift */,
+				CB87BCCF290E63B200485216 /* PushNotificationSender.swift */,
+				CB87BCD4290E646D00485216 /* FirebaseManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CB87BCD1290E63EF00485216 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				CB87BCD2290E640D00485216 /* SignUpViewController.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		CBABD0EA290D8847000FB02A = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +188,11 @@
 		CBABD114290D894E000FB02A /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				CB87BCCC290E639700485216 /* Utils */,
+				CB87BCB9290E61AF00485216 /* Protocol */,
+				CB87BCB8290E61A400485216 /* UIComponent */,
+				CB87BCB7290E619400485216 /* Literal */,
+				CB87BCB6290E619000485216 /* Base */,
 				CBABD11A290D89FB000FB02A /* Supports */,
 				CBABD119290D89F4000FB02A /* Resource */,
 				CBABD118290D89A9000FB02A /* Extensions */,
@@ -117,8 +203,8 @@
 		CBABD115290D8954000FB02A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				CBB744F0290DA465007ACB63 /* Navigation */,
 				CBABD11F290D8AC8000FB02A /* Login */,
+				CB87BCD1290E63EF00485216 /* SignUp */,
 				CBABD120290D8AD1000FB02A /* Channels */,
 				CBABD129290D8B83000FB02A /* Chat */,
 			);
@@ -141,6 +227,7 @@
 				CBB744EA290DA3DA007ACB63 /* Channel.swift */,
 				CBB744EC290DA3F8007ACB63 /* Message.swift */,
 				CBB744EE290DA412007ACB63 /* Sender.swift */,
+				CB87BCD6290E649100485216 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -148,10 +235,14 @@
 		CBABD118290D89A9000FB02A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CBABD121290D8AE9000FB02A /* UICollectionView+Additions.swift */,
-				CBABD123290D8B16000FB02A /* UIColor+Additions.swift */,
-				CBABD125290D8B42000FB02A /* UIImage+Additions.swift */,
-				CBABD127290D8B52000FB02A /* UIView+Additions.swift */,
+				CBABD123290D8B16000FB02A /* UIColor+Extension.swift */,
+				CB87BCC6290E62C100485216 /* UIViewController+Extension.swift */,
+				CBABD127290D8B52000FB02A /* UIView+Extension.swift */,
+				CBABD121290D8AE9000FB02A /* UICollectionView+Extension.swift */,
+				CB87BCC4290E62AE00485216 /* UITableView+Extension.swift */,
+				CBABD125290D8B42000FB02A /* UIImage+Extension.swift */,
+				CB87BCC8290E635300485216 /* UILabel+Extension.swift */,
+				CB87BCC2290E629C00485216 /* NSObject+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -181,7 +272,7 @@
 		CBABD11F290D8AC8000FB02A /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				CBABD12A290D8B9F000FB02A /* LoginViewController.swift */,
+				CBABD12A290D8B9F000FB02A /* LogInViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -189,6 +280,7 @@
 		CBABD120290D8AD1000FB02A /* Channels */ = {
 			isa = PBXGroup;
 			children = (
+				CBBB2060290E6E03004128BE /* Cell */,
 				CBABD12C290D8BAF000FB02A /* ChannelsViewController.swift */,
 			);
 			path = Channels;
@@ -209,12 +301,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CBB744F0290DA465007ACB63 /* Navigation */ = {
+		CBBB2060290E6E03004128BE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				CBB744F1290DA479007ACB63 /* NavigationController.swift */,
+				CBBB2061290E6E13004128BE /* ChannelTableViewCell.swift */,
 			);
-			path = Navigation;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +332,7 @@
 				CBABD112290D8926000FB02A /* FirebaseStorage */,
 				CBABD132290D8DD1000FB02A /* SnapKit */,
 				CBABD135290D8EDF000FB02A /* Then */,
+				CB87BCD8290E685400485216 /* FirebaseFirestoreSwift */,
 			);
 			productName = CobyTalk;
 			productReference = CBABD0F3290D8847000FB02A /* CobyTalk.app */;
@@ -302,23 +395,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBABD128290D8B52000FB02A /* UIView+Additions.swift in Sources */,
+				CB87BCC7290E62C100485216 /* UIViewController+Extension.swift in Sources */,
+				CBABD128290D8B52000FB02A /* UIView+Extension.swift in Sources */,
+				CBBB2062290E6E13004128BE /* ChannelTableViewCell.swift in Sources */,
 				CBB744F4290DA4AE007ACB63 /* ImageMediaItem.swift in Sources */,
 				CBB744EB290DA3DA007ACB63 /* Channel.swift in Sources */,
+				CB87BCD7290E649100485216 /* User.swift in Sources */,
+				CB87BCCE290E63A200485216 /* Logger.swift in Sources */,
 				CBABD0FB290D8847000FB02A /* ChatViewController.swift in Sources */,
+				CB87BCC1290E61FF00485216 /* BaseTableViewCell.swift in Sources */,
+				CB87BCBD290E61E000485216 /* BaseViewController.swift in Sources */,
+				CB87BCBF290E61F000485216 /* BaseCollectionViewCell.swift in Sources */,
 				CBABD0F7290D8847000FB02A /* AppDelegate.swift in Sources */,
-				CBABD122290D8AE9000FB02A /* UICollectionView+Additions.swift in Sources */,
+				CBABD122290D8AE9000FB02A /* UICollectionView+Extension.swift in Sources */,
 				CBABD0F9290D8847000FB02A /* SceneDelegate.swift in Sources */,
+				CB87BCD5290E646D00485216 /* FirebaseManager.swift in Sources */,
 				CBABD12D290D8BAF000FB02A /* ChannelsViewController.swift in Sources */,
-				CBB744F2290DA479007ACB63 /* NavigationController.swift in Sources */,
 				CBB744F6290DA4C3007ACB63 /* DatabaseRepresentation.swift in Sources */,
+				CB87BCD0290E63B200485216 /* PushNotificationSender.swift in Sources */,
+				CB87BCD3290E640D00485216 /* SignUpViewController.swift in Sources */,
 				CBABD11E290D8AA8000FB02A /* AppSettings.swift in Sources */,
 				CBB744EF290DA412007ACB63 /* Sender.swift in Sources */,
-				CBABD126290D8B42000FB02A /* UIImage+Additions.swift in Sources */,
+				CB87BCC3290E629C00485216 /* NSObject+Extension.swift in Sources */,
+				CB87BCC9290E635300485216 /* UILabel+Extension.swift in Sources */,
+				CBABD126290D8B42000FB02A /* UIImage+Extension.swift in Sources */,
+				CB87BCC5290E62AE00485216 /* UITableView+Extension.swift in Sources */,
+				CB87BCBB290E61C500485216 /* ImageLiteral.swift in Sources */,
 				CBB744ED290DA3F8007ACB63 /* Message.swift in Sources */,
 				CBABD11C290D8A8F000FB02A /* AppController.swift in Sources */,
-				CBABD12B290D8B9F000FB02A /* LoginViewController.swift in Sources */,
-				CBABD124290D8B16000FB02A /* UIColor+Additions.swift in Sources */,
+				CBABD12B290D8B9F000FB02A /* LogInViewController.swift in Sources */,
+				CB87BCCB290E638800485216 /* BackButton.swift in Sources */,
+				CBABD124290D8B16000FB02A /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,6 +674,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CB87BCD8290E685400485216 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBABD10D290D8926000FB02A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
 		CBABD10B290D88B4000FB02A /* MessageKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CBABD10A290D88B4000FB02A /* XCRemoteSwiftPackageReference "MessageKit" */;
