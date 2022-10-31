@@ -60,7 +60,7 @@ final class ChannelsViewController: BaseViewController {
         title = "메세지"
     }
     
-    func fetchRecentMessages() {
+    private func fetchRecentMessages() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         let firestoreReference = FirebaseManager.shared.firestore

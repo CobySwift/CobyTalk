@@ -7,6 +7,11 @@
 
 import UIKit
 
+import FirebaseAuth
+import FirebaseFirestore
+import SnapKit
+import Then
+
 final class ChatViewController: BaseViewController {
     
     private var name: String
@@ -16,10 +21,12 @@ final class ChatViewController: BaseViewController {
     private var chatText = ""
     private var errorMessage = ""
     private var count = 0
-    private var chatMessages: [ChatMessage]?
+    private var chatMessages = [ChatMessage]()
     
     private var currentUser: User?
     private var chatUser: User?
+    
+    private var firestoreListener: ListenerRegistration?
     
     init(name: String, fromId: String, toId: String) {
         self.name = name
@@ -76,7 +83,85 @@ final class ChatViewController: BaseViewController {
         Task { [weak self] in
             self?.currentUser = await FirebaseManager.shared.getUser()
             self?.chatUser = await FirebaseManager.shared.getUserWithId(id: toId)
-            self?.chatMessages = await FirebaseManager.shared.getChatMessages(fromId: fromId, toId: toId)
+        }
+        
+        getChatMessages()
+    }
+    
+    private func getChatMessages() {
+        let firestoreReference = FirebaseManager.shared.firestore
+            .collection("messages")
+            .document(fromId)
+            .collection(toId)
+            .order(by: "timestamp")
+        
+        firestoreListener = firestoreReference.addSnapshotListener { [weak self] querySnapshot, error in
+            guard let self = self else { return }
+            guard let snapshot = querySnapshot else {
+                print("Error listening for ChatMessages: \(error?.localizedDescription ?? "No error")")
+                return
+            }
+            
+            snapshot.documentChanges.forEach { change in
+                self.handleDocumentChange(change)
+            }
+        }
+    }
+    
+    private func addChatMessageToTable(_ chatMessage: ChatMessage) {
+        let docId = chatMessage.id
+        if chatMessages.contains(where: { rm in
+            return rm.id == docId
+        }) {
+            return
+        }
+        
+        chatMessages.append(chatMessage)
+        
+        guard let index = chatMessages.firstIndex(where: { rm in
+            return rm.id == docId
+        }) else {
+            return
+        }
+//        channelTableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+    }
+    
+    private func updateChatMessageInTable(_ chatMessage: ChatMessage) {
+        let docId = chatMessage.id
+        guard let index = chatMessages.firstIndex(where: { rm in
+            return rm.id == docId
+        }) else {
+            return
+        }
+        
+        chatMessages[index] = chatMessage
+//        channelTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+    }
+    
+    private func removeChatMessageFromTable(_ chatMessage: ChatMessage) {
+        let docId = chatMessage.id
+        guard let index = chatMessages.firstIndex(where: { rm in
+            return rm.id == docId
+        }) else {
+            return
+        }
+        
+        chatMessages.remove(at: index)
+//        channelTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+    }
+    
+    private func handleDocumentChange(_ change: DocumentChange) {
+        guard let chatMessage = try? change.document.data(as: ChatMessage.self) else {
+            return
+        }
+        
+        switch change.type {
+        case .added:
+            addChatMessageToTable(chatMessage)
+        case .modified:
+            updateChatMessageInTable(chatMessage)
+        case .removed:
+            removeChatMessageFromTable(chatMessage)
         }
     }
     
