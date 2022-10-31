@@ -78,6 +78,9 @@ extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
         
         guard let recentMessages = recentMessages else { return cell }
         cell.chatUserNameLabel.text = recentMessages[indexPath.row].userName
+        cell.chatLastLabel.text = recentMessages[indexPath.row].text
+        cell.chatDateLabel.text = recentMessages[indexPath.row].timeAgo
+        
         return cell
     }
     
