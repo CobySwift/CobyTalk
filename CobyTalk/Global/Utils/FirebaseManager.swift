@@ -125,34 +125,13 @@ final class FirebaseManager: NSObject {
         }
     }
     
-    func getFriends() async -> [User]? {
-        guard let uid = auth.currentUser?.uid else { return nil }
-        do {
-            var friends = [User]()
-            
-            let documentsSnapshot = try await firestore.collection("users").document(uid).collection("friends").getDocuments()
-            
-            documentsSnapshot.documents.forEach({ snapshot in
-                guard let friend = try? snapshot.data(as: User.self) else { return }
-                friends.append(friend)
-            })
-            
-            print("Success get friends")
-            
-            return friends
-        } catch {
-            print("Get Friends error")
-            return nil
-        }
-    }
-    
     func getRecentMessages() async -> [RecentMessage]? {
         guard let uid = auth.currentUser?.uid else { return nil }
         do {
             var recentMessages = [RecentMessage]()
             
             let documentsSnapshot = try await firestore
-                .collection("recent_messages")
+                .collection("recentMessages")
                 .document(uid)
                 .collection("messages")
                 .order(by: "timestamp")
@@ -175,6 +154,9 @@ final class FirebaseManager: NSObject {
                     print(error)
                 }
             })
+            
+            print("Get RecentMessages Success")
+            print(recentMessages)
             
             return recentMessages
         } catch {
@@ -199,17 +181,19 @@ final class FirebaseManager: NSObject {
                 ChatMessages.append(ChatMessage)
             })
             
+            print("Get ChatMessages Success")
+            print(ChatMessages)
+            
             return ChatMessages
         } catch {
-            print("Get ChatMessagess error")
+            print("Get ChatMessages error")
             return nil
         }
     }
     
     func createChatMessage(currentUser: User, chatUser: User, chatText: String) {
         
-        guard let fromId = currentUser.id else { return }
-        guard let toId = chatUser.id else { return }
+        guard let fromId = currentUser.id, let toId = chatUser.id else { return }
         
         let document = firestore.collection("messages")
             .document(fromId)
@@ -246,8 +230,7 @@ final class FirebaseManager: NSObject {
     
     func persistRecentMessage(currentUser: User, chatUser: User, chatText: String) {
         
-        guard let fromId = currentUser.id else { return }
-        guard let toId = chatUser.id else { return }
+        guard let fromId = currentUser.id, let toId = chatUser.id else { return }
         
         let document = firestore
             .collection("recentMessages")

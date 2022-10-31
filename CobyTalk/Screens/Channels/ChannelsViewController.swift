@@ -41,6 +41,9 @@ final class ChannelsViewController: BaseViewController {
         Task { [weak self] in
             self?.currentUser = await FirebaseManager.shared.getUser()
             self?.recentMessages = await FirebaseManager.shared.getRecentMessages()
+            DispatchQueue.main.async {
+                self?.channelTableView.reloadData()
+            }
         }
     }
     
