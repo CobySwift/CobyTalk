@@ -38,6 +38,10 @@ final class ChannelsViewController: BaseViewController {
         $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
+    private lazy var addButton = AddButton().then {
+        $0.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
+    }
+    
     // MARK: - func
     
     override func render() {
@@ -67,9 +71,11 @@ final class ChannelsViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
 
+        let addButton = makeBarButtonItem(with: addButton)
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .automatic
         navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = addButton
         
         title = "메세지"
     }
@@ -121,6 +127,13 @@ final class ChannelsViewController: BaseViewController {
         case .removed:
             removeChannelFromTable(channel)
         }
+    }
+    
+    @objc private func didTapAddButton() {
+        let viewController = FriendsViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        
+        present(navigationController, animated: true, completion: nil)
     }
 }
 

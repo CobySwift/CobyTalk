@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-class LogInViewController: BaseViewController {
+final class LogInViewController: BaseViewController {
     
     private let loginLabel = UILabel().then {
         $0.textAlignment = .center
@@ -52,16 +52,18 @@ class LogInViewController: BaseViewController {
         $0.makeShadow(color: .black, opacity: 0.08, offset: CGSize(width: 0, height: 4), radius: 20)
     }
     
-    private let logInbutton = UIButton().then {
+    private lazy var logInbutton = UIButton().then {
         $0.backgroundColor = .mainBlack
         $0.setTitleColor(.white, for: .normal)
         $0.setTitle("Log In", for: .normal)
+        $0.addTarget(self, action: #selector(didTapLogInbutton), for: .touchUpInside)
     }
         
-    private let signUpButton = UIButton().then {
+    private lazy var signUpButton = UIButton().then {
         $0.backgroundColor = .mainBlack
         $0.setTitleColor(.white, for: .normal)
         $0.setTitle("Sign Up", for: .normal)
+        $0.addTarget(self, action: #selector(didTapSignUpButton), for: .touchUpInside)
     }
     
     private let logInErrorLabel = UILabel().then {
@@ -73,9 +75,6 @@ class LogInViewController: BaseViewController {
     
     override func render() {
         view.addSubviews(loginLabel, emailField, passwordField, logInbutton, signUpButton, logInErrorLabel)
-        
-        logInbutton.addTarget(self, action: #selector(didTapLogInbutton), for: .touchUpInside)
-        signUpButton.addTarget(self, action: #selector(didTapSignUpButton), for: .touchUpInside)
         
         logInErrorLabel.isHidden = true
         

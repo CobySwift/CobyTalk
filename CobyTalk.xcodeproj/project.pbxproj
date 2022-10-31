@@ -47,6 +47,10 @@
 		CBB744F4290DA4AE007ACB63 /* ImageMediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB744F3290DA4AE007ACB63 /* ImageMediaItem.swift */; };
 		CBB744F6290DA4C3007ACB63 /* DatabaseRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB744F5290DA4C3007ACB63 /* DatabaseRepresentation.swift */; };
 		CBBB2062290E6E13004128BE /* ChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2061290E6E13004128BE /* ChannelTableViewCell.swift */; };
+		CBE26659290FB43E00696D9E /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE26658290FB43E00696D9E /* FriendsViewController.swift */; };
+		CBE2665C290FB45800696D9E /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE2665B290FB45800696D9E /* FriendCollectionViewCell.swift */; };
+		CBE2665E290FB8EA00696D9E /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE2665D290FB8EA00696D9E /* CloseButton.swift */; };
+		CBE26660290FB92900696D9E /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE2665F290FB92900696D9E /* AddButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +89,10 @@
 		CBB744F3290DA4AE007ACB63 /* ImageMediaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMediaItem.swift; sourceTree = "<group>"; };
 		CBB744F5290DA4C3007ACB63 /* DatabaseRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseRepresentation.swift; sourceTree = "<group>"; };
 		CBBB2061290E6E13004128BE /* ChannelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTableViewCell.swift; sourceTree = "<group>"; };
+		CBE26658290FB43E00696D9E /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		CBE2665B290FB45800696D9E /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
+		CBE2665D290FB8EA00696D9E /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		CBE2665F290FB92900696D9E /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				CB87BCCA290E638800485216 /* BackButton.swift */,
+				CBE2665D290FB8EA00696D9E /* CloseButton.swift */,
+				CBE2665F290FB92900696D9E /* AddButton.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -205,6 +215,7 @@
 				CB87BCD1290E63EF00485216 /* SignUp */,
 				CBABD120290D8AD1000FB02A /* Channels */,
 				CBABD129290D8B83000FB02A /* Chat */,
+				CBE26657290FB3F600696D9E /* Friends */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -306,6 +317,23 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		CBE26657290FB3F600696D9E /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				CBE2665A290FB44700696D9E /* Cell */,
+				CBE26658290FB43E00696D9E /* FriendsViewController.swift */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		CBE2665A290FB44700696D9E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CBE2665B290FB45800696D9E /* FriendCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -393,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB87BCC7290E62C100485216 /* UIViewController+Extension.swift in Sources */,
+				CBE26660290FB92900696D9E /* AddButton.swift in Sources */,
 				CBABD128290D8B52000FB02A /* UIView+Extension.swift in Sources */,
 				CBBB2062290E6E13004128BE /* ChannelTableViewCell.swift in Sources */,
 				CBB744F4290DA4AE007ACB63 /* ImageMediaItem.swift in Sources */,
@@ -407,6 +436,7 @@
 				CBABD122290D8AE9000FB02A /* UICollectionView+Extension.swift in Sources */,
 				CBABD0F9290D8847000FB02A /* SceneDelegate.swift in Sources */,
 				CB87BCD5290E646D00485216 /* FirebaseManager.swift in Sources */,
+				CBE2665E290FB8EA00696D9E /* CloseButton.swift in Sources */,
 				CBABD12D290D8BAF000FB02A /* ChannelsViewController.swift in Sources */,
 				CBB744F6290DA4C3007ACB63 /* DatabaseRepresentation.swift in Sources */,
 				CB87BCD0290E63B200485216 /* PushNotificationSender.swift in Sources */,
@@ -416,7 +446,9 @@
 				CB87BCC9290E635300485216 /* UILabel+Extension.swift in Sources */,
 				CBABD126290D8B42000FB02A /* UIImage+Extension.swift in Sources */,
 				CB87BCC5290E62AE00485216 /* UITableView+Extension.swift in Sources */,
+				CBE2665C290FB45800696D9E /* FriendCollectionViewCell.swift in Sources */,
 				CB87BCBB290E61C500485216 /* ImageLiteral.swift in Sources */,
+				CBE26659290FB43E00696D9E /* FriendsViewController.swift in Sources */,
 				CBB744ED290DA3F8007ACB63 /* Message.swift in Sources */,
 				CBABD11C290D8A8F000FB02A /* AppController.swift in Sources */,
 				CBABD12B290D8B9F000FB02A /* LogInViewController.swift in Sources */,
