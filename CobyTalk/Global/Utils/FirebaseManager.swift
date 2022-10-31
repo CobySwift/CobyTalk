@@ -72,9 +72,9 @@ final class FirebaseManager: NSObject {
     func getUser() async -> User? {
         guard let uid = auth.currentUser?.uid else { return nil }
         do {
-            let data = try await firestore.collection("users").document(uid).getDocument(as: User.self)
+            let user = try await firestore.collection("users").document(uid).getDocument(as: User.self)
             print("Success get user")
-            return data
+            return user
         } catch {
             print("Get User error")
             return nil
@@ -100,10 +100,9 @@ final class FirebaseManager: NSObject {
             let documentsSnapshot = try await firestore.collection("users").getDocuments()
             
             documentsSnapshot.documents.forEach({ snapshot in
-                let user = try? snapshot.data(as: User.self)
-                if user == nil { return }
-                if user!.uid != uid {
-                    users.append(user!)
+                guard let user = try? snapshot.data(as: User.self) else { return }
+                if user.uid != uid {
+                    users.append(user)
                 }
             })
             
@@ -123,9 +122,8 @@ final class FirebaseManager: NSObject {
             let documentsSnapshot = try await firestore.collection("users").document(uid).collection("friends").getDocuments()
             
             documentsSnapshot.documents.forEach({ snapshot in
-                let friend = try? snapshot.data(as: User.self)
-                if friend == nil { return }
-                friends.append(friend!)
+                guard let friend = try? snapshot.data(as: User.self) else { return }
+                friends.append(friend)
             })
             
             print("Success get friends")

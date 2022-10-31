@@ -83,7 +83,8 @@ extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController = ChatViewController()
+        guard let recentMessage = recentMessages?[indexPath.row] else { return }
+        let viewController = ChatViewController(name: recentMessage.username, fromId: recentMessage.fromId, toId: recentMessage.toId)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

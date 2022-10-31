@@ -12,10 +12,9 @@ import Then
 
 final class FriendsViewController: BaseViewController {
     
-    private var user: User?
+    private var currentUser: User?
     private var users: [User]? = []
     private var filteredUsers: [User]? = []
-    private var friendIds: [String]? = []
     
     private var isFiltering: Bool {
         let searchController = self.navigationItem.searchController
@@ -51,35 +50,28 @@ final class FriendsViewController: BaseViewController {
                                 forCellWithReuseIdentifier: FriendCollectionViewCell.className)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        Task { [weak self] in
-            self?.user = await FirebaseManager.shared.getUser()
-            self?.users = await FirebaseManager.shared.getUsers()
-            DispatchQueue.main.async {
-                self?.listCollectionView.reloadData()
-            }
-        }
-    }
-    
     override func render() {
         view.addSubview(listCollectionView)
         
         listCollectionView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
+        
+        Task { [weak self] in
+            self?.currentUser = await FirebaseManager.shared.getUser()
+            self?.users = await FirebaseManager.shared.getUsers()
+            DispatchQueue.main.async {
+                self?.listCollectionView.reloadData()
+            }
+        }
     }
 
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = "검색"
-        searchController.searchResultsUpdater = self
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .automatic
         
-        navigationItem.leftBarButtonItem = nil
-        navigationItem.searchController = searchController
         title = "친구 찾기"
     }
 }
@@ -97,17 +89,10 @@ extension FriendsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: FriendCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         
-        var newUser: User
-        if self.isFiltering {
-            guard let filteredUser = filteredUsers?[indexPath.item] else { return cell }
-            newUser = filteredUser
-        } else {
-            guard let allUser = users?[indexPath.item] else { return cell }
-            newUser = allUser
-        }
+        guard let user = users?[indexPath.item] else { return cell }
         
-        cell.nameLabel.text = newUser.name
-        cell.emailLabel.text = newUser.email
+        cell.nameLabel.text = user.name
+        cell.emailLabel.text = user.email
         
         return cell
     }
@@ -116,15 +101,9 @@ extension FriendsViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension FriendsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let viewController = ChatViewController()
+        guard let currentUser = currentUser else { return }
+        guard let chatUser = users?[indexPath.row] else { return }
+        let viewController = ChatViewController(name: chatUser.name, fromId: currentUser.uid, toId: chatUser.uid)
         navigationController?.pushViewController(viewController, animated: true)
-    }
-}
-
-extension FriendsViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text?.lowercased() else { return }
-        self.filteredUsers! = self.users!.filter { $0.name.lowercased().contains(text) }
-        self.listCollectionView.reloadData()
     }
 }
