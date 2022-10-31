@@ -71,10 +71,10 @@ extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ChannelTableViewCell.className, for: indexPath) as! ChannelTableViewCell
         
-        cell.selectionStyle = . none
+        cell.selectionStyle = .none
         
         guard let recentMessages = recentMessages else { return cell }
-        cell.chatUserNameLabel.text = recentMessages[indexPath.row].username
+        cell.chatUserNameLabel.text = recentMessages[indexPath.row].userName
         return cell
     }
     
@@ -84,7 +84,7 @@ extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let recentMessage = recentMessages?[indexPath.row] else { return }
-        let viewController = ChatViewController(name: recentMessage.username, fromId: recentMessage.fromId, toId: recentMessage.toId)
+        let viewController = ChatViewController(name: recentMessage.userName, fromId: recentMessage.fromId, toId: recentMessage.toId)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

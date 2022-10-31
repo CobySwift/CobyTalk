@@ -13,9 +13,13 @@ final class ChatViewController: BaseViewController {
     private var fromId: String
     private var toId: String
     
-    deinit {
-//        messageListener?.remove()
-    }
+    private var chatText = ""
+    private var errorMessage = ""
+    private var count = 0
+    private var chatMessages: [ChatMessage]?
+    
+    private var currentUser: User?
+    private var chatUser: User?
     
     init(name: String, fromId: String, toId: String) {
         self.name = name
@@ -28,5 +32,13 @@ final class ChatViewController: BaseViewController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func render() {
+        Task { [weak self] in
+            self?.currentUser = await FirebaseManager.shared.getUser()
+            self?.chatUser = await FirebaseManager.shared.getUserWithId(id: toId)
+            self?.chatMessages = await FirebaseManager.shared.getChatMessages(fromId: fromId, toId: toId)
+        }
     }
 }

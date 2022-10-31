@@ -81,6 +81,17 @@ final class FirebaseManager: NSObject {
         }
     }
     
+    func getUserWithId(id: String) async -> User? {
+        do {
+            let user = try await firestore.collection("users").document(id).getDocument(as: User.self)
+            print("Success get user")
+            return user
+        } catch {
+            print("Get User error")
+            return nil
+        }
+    }
+    
     func updateUserToken(uid: String) async {
         do {
 //            let appDelegate = await UIApplication.shared.delegate as! AppDelegate
@@ -169,6 +180,115 @@ final class FirebaseManager: NSObject {
         } catch {
             print("Get RecentMessages error")
             return nil
+        }
+    }
+    
+    func getChatMessages(fromId: String, toId: String) async -> [ChatMessage]? {
+        do {
+            var ChatMessages = [ChatMessage]()
+            
+            let documentsSnapshot = try await firestore
+                .collection("messages")
+                .document(fromId)
+                .collection(toId)
+                .order(by: "timestamp")
+                .getDocuments()
+            
+            documentsSnapshot.documents.forEach({ snapshot in
+                guard let ChatMessage = try? snapshot.data(as: ChatMessage.self) else { return }
+                ChatMessages.append(ChatMessage)
+            })
+            
+            return ChatMessages
+        } catch {
+            print("Get ChatMessagess error")
+            return nil
+        }
+    }
+    
+    func createChatMessage(currentUser: User, chatUser: User, chatText: String) {
+        
+        guard let fromId = currentUser.id else { return }
+        guard let toId = chatUser.id else { return }
+        
+        let document = firestore.collection("messages")
+            .document(fromId)
+            .collection(toId)
+            .document()
+        
+        let msg = ChatMessage(id: nil, fromId: fromId, toId: toId, text: chatText, timestamp: Date())
+        
+        try? document.setData(from: msg) { error in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            print("Successfully saved current user sending message")
+        }
+        
+        let recipientMessageDocument = firestore.collection("messages")
+            .document(toId)
+            .collection(fromId)
+            .document()
+        
+        try? recipientMessageDocument.setData(from: msg) { error in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            print("Recipient saved message as well")
+        }
+        
+        persistRecentMessage(currentUser: currentUser, chatUser: chatUser, chatText: chatText)
+    }
+    
+    func persistRecentMessage(currentUser: User, chatUser: User, chatText: String) {
+        
+        guard let fromId = currentUser.id else { return }
+        guard let toId = chatUser.id else { return }
+        
+        let document = firestore
+            .collection("recentMessages")
+            .document(fromId)
+            .collection("messages")
+            .document(toId)
+        
+        let data = [
+            "timestamp": Timestamp(),
+            "text": chatText,
+            "fromId": fromId,
+            "toId": toId,
+            "userName": chatUser.name
+        ] as [String : Any]
+   
+        document.setData(data) { error in
+            if let error = error {
+                print("Failed to save recent message: \(error)")
+                return
+            }
+        }
+        
+        let recipientMessageDocument = firestore
+            .collection("recentMessages")
+            .document(toId)
+            .collection("messages")
+            .document(fromId)
+        
+        let recipientMessageData = [
+            "timestamp": Timestamp(),
+            "text": chatText,
+            "fromId": toId,
+            "toId": fromId,
+            "userName": currentUser.name
+        ] as [String : Any]
+        
+        recipientMessageDocument.setData(recipientMessageData) { error in
+            if let error = error {
+                print("Failed to save recent message: \(error)")
+                return
+            }
         }
     }
 }

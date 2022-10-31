@@ -10,13 +10,9 @@ import FirebaseFirestoreSwift
 
 struct RecentMessage: Codable, Identifiable {
     @DocumentID var id: String?
-    let text, email: String
+    let text, userName: String
     let fromId, toId: String
     let timestamp: Date
-    
-    var username: String {
-        email.components(separatedBy: "@").first ?? email
-    }
     
     var timeAgo: String {
         let formatter = RelativeDateTimeFormatter()
