@@ -123,5 +123,9 @@ final class SignUpViewController: BaseViewController {
             await FirebaseManager.shared.createNewAccount(email: email, password: password)
             await FirebaseManager.shared.storeUserInformation(email: email, name: name)
         }
+        
+        let navigationController = UINavigationController(rootViewController: ChannelsViewController())
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
     }
 }

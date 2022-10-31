@@ -138,6 +138,10 @@ final class LogInViewController: BaseViewController {
             }
             await FirebaseManager.shared.updateUserToken(uid: userId)
         }
+        
+        let navigationController = UINavigationController(rootViewController: ChannelsViewController())
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     @objc private func didTapSignUpButton() {
