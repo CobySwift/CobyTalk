@@ -7,13 +7,20 @@
 
 import UIKit
 
+import FirebaseAuth
+import FirebaseFirestore
 import SnapKit
 import Then
 
 final class ChannelsViewController: BaseViewController {
     
-    private var currentUser: User?
-    private var recentMessages: [RecentMessage]?
+    private var recentMessages = [RecentMessage]()
+    
+    private var firestoreListener: ListenerRegistration?
+
+    deinit {
+        firestoreListener?.remove()
+    }
     
     // MARK: - property
     
@@ -38,13 +45,7 @@ final class ChannelsViewController: BaseViewController {
             $0.edges.equalToSuperview()
         }
         
-        Task { [weak self] in
-            self?.currentUser = await FirebaseManager.shared.getUser()
-            self?.recentMessages = await FirebaseManager.shared.getRecentMessages()
-            DispatchQueue.main.async {
-                self?.channelTableView.reloadData()
-            }
-        }
+        fetchRecentMessages()
     }
     
     override func setupNavigationBar() {
@@ -59,6 +60,84 @@ final class ChannelsViewController: BaseViewController {
         title = "메세지"
     }
     
+    func fetchRecentMessages() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let firestoreReference = FirebaseManager.shared.firestore
+            .collection("recentMessages")
+            .document(uid)
+            .collection("messages")
+        
+        firestoreListener = firestoreReference.addSnapshotListener { [weak self] querySnapshot, error in
+            guard let self = self else { return }
+            guard let snapshot = querySnapshot else {
+                print("Error listening for recent messages: \(error?.localizedDescription ?? "No error")")
+                return
+            }
+            
+            snapshot.documentChanges.forEach { change in
+                self.handleDocumentChange(change)
+            }
+        }
+    }
+    
+    private func addRecentMessageToTable(_ recentMessage: RecentMessage) {
+        let docId = recentMessage.id
+        if recentMessages.contains(where: { rm in
+            return rm.id == docId
+        }) {
+            return
+        }
+        
+        recentMessages.append(recentMessage)
+        
+        guard let index = recentMessages.firstIndex(where: { rm in
+            return rm.id == docId
+        }) else {
+            return
+        }
+        channelTableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+    }
+    
+    private func updateRecentMessageInTable(_ recentMessage: RecentMessage) {
+        let docId = recentMessage.id
+        guard let index = recentMessages.firstIndex(where: { rm in
+            return rm.id == docId
+        }) else {
+            return
+        }
+        
+        recentMessages[index] = recentMessage
+        channelTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+    }
+    
+    private func removeRecentMessageFromTable(_ recentMessage: RecentMessage) {
+        let docId = recentMessage.id
+        guard let index = recentMessages.firstIndex(where: { rm in
+            return rm.id == docId
+        }) else {
+            return
+        }
+        
+        recentMessages.remove(at: index)
+        channelTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+    }
+    
+    private func handleDocumentChange(_ change: DocumentChange) {
+        guard let recentMessage = try? change.document.data(as: RecentMessage.self) else {
+            return
+        }
+        
+        switch change.type {
+        case .added:
+            addRecentMessageToTable(recentMessage)
+        case .modified:
+            updateRecentMessageInTable(recentMessage)
+        case .removed:
+            removeRecentMessageFromTable(recentMessage)
+        }
+    }
+    
     @objc private func didTapAddButton() {
         let viewController = FriendsViewController()
         self.navigationController?.pushViewController(viewController, animated: true)
@@ -67,7 +146,6 @@ final class ChannelsViewController: BaseViewController {
 
 extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let recentMessages = recentMessages else { return 0 }
         return recentMessages.count
     }
     
@@ -76,7 +154,6 @@ extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.selectionStyle = .none
         
-        guard let recentMessages = recentMessages else { return cell }
         cell.chatUserNameLabel.text = recentMessages[indexPath.row].userName
         cell.chatLastLabel.text = recentMessages[indexPath.row].text
         cell.chatDateLabel.text = recentMessages[indexPath.row].timeAgo
@@ -89,7 +166,7 @@ extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let recentMessage = recentMessages?[indexPath.row] else { return }
+        let recentMessage = recentMessages[indexPath.row]
         let viewController = ChatViewController(name: recentMessage.userName, fromId: recentMessage.fromId, toId: recentMessage.toId)
         navigationController?.pushViewController(viewController, animated: true)
     }
