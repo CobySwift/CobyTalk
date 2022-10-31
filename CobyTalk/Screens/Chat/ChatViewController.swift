@@ -168,6 +168,7 @@ final class ChatViewController: BaseViewController {
     @objc private func didTapChatSendbutton() {
         guard let currentUser = currentUser, let chatUser = chatUser, let chatText = chatTextField.text else { return }
         FirebaseManager.shared.createChatMessage(currentUser: currentUser, chatUser: chatUser, chatText: chatText)
+        PushNotificationSender().sendPushNotification(to: chatUser.token, title: currentUser.name, body: chatText)
         chatTextField.text = ""
     }
 }
