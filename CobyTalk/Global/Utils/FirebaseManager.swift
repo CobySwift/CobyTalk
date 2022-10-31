@@ -59,9 +59,9 @@ final class FirebaseManager: NSObject {
     func storeUserInformation(email: String, name: String) async {
         guard let uid = auth.currentUser?.uid else { return }
         do {
-//            let appDelegate = await UIApplication.shared.delegate as! AppDelegate
-//            let userToken = await appDelegate.userToken
-            let userData = ["email": email, "uid": uid, "name": name]
+            let appDelegate = await UIApplication.shared.delegate as! AppDelegate
+            let userToken = await appDelegate.userToken
+            let userData = ["email": email, "uid": uid, "name": name, "token": userToken]
         
             try await firestore.collection("users").document(uid).setData(userData)
         } catch {
@@ -94,9 +94,9 @@ final class FirebaseManager: NSObject {
     
     func updateUserToken(uid: String) async {
         do {
-//            let appDelegate = await UIApplication.shared.delegate as! AppDelegate
-//            let userToken = await appDelegate.userToken
-//            try await FirebaseManager.store.collection("users").document(uid).updateData(["token" : userToken])
+            let appDelegate = await UIApplication.shared.delegate as! AppDelegate
+            let userToken = await appDelegate.userToken
+            try await firestore.collection("users").document(uid).updateData(["token" : userToken])
             print("Success Update")
         } catch {
             print("Update User error")

@@ -51,10 +51,12 @@ final class ChannelsViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
 
+        let signOut = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOut))
         let addButton = makeBarButtonItem(with: addButton)
+
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .automatic
-        navigationItem.leftBarButtonItem = nil
+        navigationItem.leftBarButtonItem = signOut
         navigationItem.rightBarButtonItem = addButton
         
         title = "메세지"
@@ -137,6 +139,14 @@ final class ChannelsViewController: BaseViewController {
         case .removed:
             removeRecentMessageFromTable(recentMessage)
         }
+    }
+    
+    @objc private func signOut() {
+        try? Auth.auth().signOut()
+        
+        let navigationController = UINavigationController(rootViewController: LogInViewController())
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
     
     @objc private func didTapAddButton() {
