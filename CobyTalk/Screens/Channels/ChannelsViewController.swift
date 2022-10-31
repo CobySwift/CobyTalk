@@ -7,26 +7,13 @@
 
 import UIKit
 
-import FirebaseAuth
-import FirebaseFirestore
 import SnapKit
 import Then
 
 final class ChannelsViewController: BaseViewController {
-
-    private let database = Firestore.firestore()
-    private var channelReference: CollectionReference {
-        return database.collection("channels")
-    }
-
-    private var channels: [Channel] = []
-    private var channelListener: ListenerRegistration?
-
+    
     private var currentUser: User?
-
-    deinit {
-        channelListener?.remove()
-    }
+    private var recentMessages: [RecentMessage]?
     
     // MARK: - property
     
@@ -46,25 +33,14 @@ final class ChannelsViewController: BaseViewController {
     
     override func render() {
         view.addSubview(channelTableView)
+        
         channelTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
         Task { [weak self] in
-            guard let user = await FirebaseManager.shared.getUser() else { return }
-            self?.currentUser = user
-        }
-        
-        channelListener = channelReference.addSnapshotListener { [weak self] querySnapshot, error in
-            guard let self = self else { return }
-            guard let snapshot = querySnapshot else {
-                print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
-                return
-            }
-
-            snapshot.documentChanges.forEach { change in
-                self.handleDocumentChange(change)
-            }
+            self?.currentUser = await FirebaseManager.shared.getUser()
+            self?.recentMessages = await FirebaseManager.shared.getRecentMessages()
         }
     }
     
@@ -80,55 +56,6 @@ final class ChannelsViewController: BaseViewController {
         title = "메세지"
     }
     
-    // MARK: - Helpers
-
-    private func addChannelToTable(_ channel: Channel) {
-        if channels.contains(channel) {
-            return
-        }
-
-        channels.append(channel)
-        channels.sort()
-
-        guard let index = channels.firstIndex(of: channel) else {
-            return
-        }
-        channelTableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-    }
-
-    private func updateChannelInTable(_ channel: Channel) {
-        guard let index = channels.firstIndex(of: channel) else {
-            return
-        }
-
-        channels[index] = channel
-        channelTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-    }
-
-    private func removeChannelFromTable(_ channel: Channel) {
-        guard let index = channels.firstIndex(of: channel) else {
-            return
-        }
-
-        channels.remove(at: index)
-        channelTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-    }
-
-    private func handleDocumentChange(_ change: DocumentChange) {
-        guard let channel = Channel(document: change.document) else {
-            return
-        }
-
-        switch change.type {
-        case .added:
-            addChannelToTable(channel)
-        case .modified:
-            updateChannelInTable(channel)
-        case .removed:
-            removeChannelFromTable(channel)
-        }
-    }
-    
     @objc private func didTapAddButton() {
         let viewController = FriendsViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
@@ -139,14 +66,17 @@ final class ChannelsViewController: BaseViewController {
 
 extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return channels.count
+        guard let recentMessages = recentMessages else { return 0 }
+        return recentMessages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ChannelTableViewCell.className, for: indexPath) as! ChannelTableViewCell
         
         cell.selectionStyle = . none
-        cell.chatUserNameLabel.text = channels[indexPath.row].name
+        
+        guard let recentMessages = recentMessages else { return cell }
+        cell.chatUserNameLabel.text = recentMessages[indexPath.row].username
         return cell
     }
     
@@ -155,9 +85,7 @@ extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let channel = channels[indexPath.row]
-        let viewController = ChatViewController(user: currentUser!, channel: channel)
-        viewController.hidesBottomBarWhenPushed = true
+        let viewController = ChatViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

@@ -2,7 +2,7 @@
 //  FriendCollectionViewCell.swift
 //  CobyTalk
 //
-//  Created by Coby Kim on 2022/10/31.
+//  Created by COBY_PRO on 2022/10/31.
 //
 
 import UIKit

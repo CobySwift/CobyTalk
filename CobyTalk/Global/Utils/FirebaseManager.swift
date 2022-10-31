@@ -9,19 +9,28 @@ import UIKit
 
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
 import FirebaseFirestore
 
-final class FirebaseManager {
+final class FirebaseManager: NSObject {
     
     static let shared = FirebaseManager()
-    static let store = Firestore.firestore()
-    static let auth = Auth.auth()
     
-    private init() { }
+    let auth: Auth
+    let storage: Storage
+    let firestore: Firestore
+    
+    override init() {
+        self.auth = Auth.auth()
+        self.storage = Storage.storage()
+        self.firestore = Firestore.firestore()
+        
+        super.init()
+    }
     
     func signInUser(email: String, password: String) async -> String? {
         do {
-            let data = try await FirebaseManager.auth.signIn(withEmail: email, password: password)
+            let data = try await auth.signIn(withEmail: email, password: password)
             print("Success LogIn")
             return data.user.uid
         } catch {
@@ -32,7 +41,7 @@ final class FirebaseManager {
     
     func createNewAccount(email: String, password: String) async {
         do {
-            try await FirebaseManager.auth.createUser(withEmail: email, password: password)
+            try await auth.createUser(withEmail: email, password: password)
             print("Successfully created user")
         } catch {
             print("Failed to create user")
@@ -41,29 +50,29 @@ final class FirebaseManager {
     
     func deleteAccount() async {
         do {
-            try await FirebaseManager.auth.currentUser?.delete()
+            try await auth.currentUser?.delete()
         } catch {
             print("Failed to disconnect friend")
         }
     }
     
     func storeUserInformation(email: String, name: String) async {
-        guard let uid = FirebaseManager.auth.currentUser?.uid else { return }
+        guard let uid = auth.currentUser?.uid else { return }
         do {
 //            let appDelegate = await UIApplication.shared.delegate as! AppDelegate
 //            let userToken = await appDelegate.userToken
             let userData = ["email": email, "uid": uid, "name": name]
         
-            try await FirebaseManager.store.collection("users").document(uid).setData(userData)
+            try await firestore.collection("users").document(uid).setData(userData)
         } catch {
             print("Store User error")
         }
     }
     
     func getUser() async -> User? {
-        guard let uid = FirebaseManager.auth.currentUser?.uid else { return nil }
+        guard let uid = auth.currentUser?.uid else { return nil }
         do {
-            let data = try await FirebaseManager.store.collection("users").document(uid).getDocument(as: User.self)
+            let data = try await firestore.collection("users").document(uid).getDocument(as: User.self)
             print("Success get user")
             return data
         } catch {
@@ -84,16 +93,16 @@ final class FirebaseManager {
     }
     
     func getUsers() async -> [User]? {
-        guard let userId = FirebaseManager.auth.currentUser?.uid else { return nil }
+        guard let uid = auth.currentUser?.uid else { return nil }
         do {
             var users = [User]()
             
-            let documentsSnapshot = try await FirebaseManager.store.collection("users").getDocuments()
+            let documentsSnapshot = try await firestore.collection("users").getDocuments()
             
             documentsSnapshot.documents.forEach({ snapshot in
                 let user = try? snapshot.data(as: User.self)
                 if user == nil { return }
-                if user!.uid != userId {
+                if user!.uid != uid {
                     users.append(user!)
                 }
             })
@@ -107,11 +116,11 @@ final class FirebaseManager {
     }
     
     func getFriends() async -> [User]? {
-        guard let userId = FirebaseManager.auth.currentUser?.uid else { return nil }
+        guard let uid = auth.currentUser?.uid else { return nil }
         do {
             var friends = [User]()
             
-            let documentsSnapshot = try await FirebaseManager.store.collection("users").document(userId).collection("friends").getDocuments()
+            let documentsSnapshot = try await firestore.collection("users").document(uid).collection("friends").getDocuments()
             
             documentsSnapshot.documents.forEach({ snapshot in
                 let friend = try? snapshot.data(as: User.self)
@@ -128,78 +137,39 @@ final class FirebaseManager {
         }
     }
     
-    func getFriendIds() async -> [String]? {
-        guard let userId = FirebaseManager.auth.currentUser?.uid else { return nil }
+    func getRecentMessages() async -> [RecentMessage]? {
+        guard let uid = auth.currentUser?.uid else { return nil }
         do {
-            var friendIds = [String]()
+            var recentMessages = [RecentMessage]()
             
-            let documentsSnapshot = try await FirebaseManager.store.collection("users").document(userId).collection("friends").getDocuments()
+            let documentsSnapshot = try await firestore
+                .collection("recent_messages")
+                .document(uid)
+                .collection("messages")
+                .order(by: "timestamp")
+                .getDocuments()
             
             documentsSnapshot.documents.forEach({ snapshot in
-                let friend = try? snapshot.data(as: User.self)
-                if friend == nil { return }
-                friendIds.append(friend!.uid)
-            })
-            
-            print("Success get friendIds")
-            
-            return friendIds
-        } catch {
-            print("Get Friends error")
-            return nil
-        }
-    }
-    
-    func connectUser(user: User, friend: User) {
-        let documentUser = FirebaseManager.store
-            .collection("users")
-            .document(user.id!)
-            .collection("friends")
-            .document(friend.uid)
-        
-        let dataUser = [
-            "uid": friend.uid,
-            "email": friend.email,
-            "name": friend.name,
-        ] as [String : Any]
-        
-        documentUser.setData(dataUser)
-        
-        let documentFriend = FirebaseManager.store
-            .collection("users")
-            .document(friend.uid)
-            .collection("friends")
-            .document(user.id!)
-        
-        let dataFriend = [
-            "uid": user.id!,
-            "email": user.email,
-            "name": user.name,
-        ] as [String : Any]
-        
-        documentFriend.setData(dataFriend)
-        
-        print("Success to make friend")
-    }
-    
-    func getChannels() async -> [Channel]? {
-        guard let userId = FirebaseManager.auth.currentUser?.uid else { return nil }
-        do {
-            var channels = [Channel]()
-            
-            let documentsSnapshot = try await FirebaseManager.store.collection("users").getDocuments()
-            
-            documentsSnapshot.documents.forEach({ snapshot in
-                guard let user = try? snapshot.data(as: User.self) else { return }
-                if user.uid != userId {
-                    channels.append(Channel(name: user.name))
+                guard let recentMessage = try? snapshot.data(as: RecentMessage.self) else { return }
+                
+                if let index = recentMessages.firstIndex(where: { rm in
+                    return rm.id == recentMessage.id
+                }) {
+                    recentMessages.remove(at: index)
+                }
+                
+                do {
+                    if let rm = try? recentMessage {
+                        recentMessages.insert(rm, at: 0)
+                    }
+                } catch {
+                    print(error)
                 }
             })
             
-            print("Success get channels")
-            return channels
+            return recentMessages
         } catch {
-            print("Get Users error")
+            print("Get RecentMessages error")
             return nil
         }
     }

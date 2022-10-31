@@ -2,7 +2,7 @@
 //  FriendsViewController.swift
 //  CobyTalk
 //
-//  Created by Coby Kim on 2022/10/31.
+//  Created by COBY_PRO on 2022/10/31.
 //
 
 import UIKit
@@ -59,7 +59,6 @@ final class FriendsViewController: BaseViewController {
         
         Task { [weak self] in
             self?.user = await FirebaseManager.shared.getUser()
-            self?.friendIds = await FirebaseManager.shared.getFriendIds()
             self?.users = await FirebaseManager.shared.getUsers()
             DispatchQueue.main.async {
                 self?.listCollectionView.reloadData()
@@ -139,7 +138,6 @@ extension FriendsViewController: UICollectionViewDataSource {
             guard let allUser = users?[sender.tag] else { return }
             friend = allUser
         }
-        FirebaseManager.shared.connectUser(user: user!, friend: friend)
     }
 }
 
