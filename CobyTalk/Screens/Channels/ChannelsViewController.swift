@@ -58,9 +58,7 @@ final class ChannelsViewController: BaseViewController {
     
     @objc private func didTapAddButton() {
         let viewController = FriendsViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
-        
-        present(navigationController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

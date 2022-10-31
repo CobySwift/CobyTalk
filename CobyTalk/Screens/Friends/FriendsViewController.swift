@@ -45,13 +45,10 @@ final class FriendsViewController: BaseViewController {
     private lazy var listCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout).then {
         $0.backgroundColor = .clear
         $0.dataSource = self
+        $0.delegate = self
         $0.showsVerticalScrollIndicator = false
         $0.register(cell: FriendCollectionViewCell.self,
                                 forCellWithReuseIdentifier: FriendCollectionViewCell.className)
-    }
-    
-    private lazy var closeButton = CloseButton().then {
-        $0.addTarget(self, action: #selector(didTapCloseButton), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -77,20 +74,13 @@ final class FriendsViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
-        let closeButton = makeBarButtonItem(with: closeButton)
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "검색"
         searchController.searchResultsUpdater = self
         
         navigationItem.leftBarButtonItem = nil
-        navigationItem.rightBarButtonItem = closeButton
         navigationItem.searchController = searchController
         title = "친구 찾기"
-    }
-    
-    @objc private func didTapCloseButton() {
-        NotificationCenter.default.post(name: Notification.Name("willDissmiss"), object: nil)
-        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -106,6 +96,7 @@ extension FriendsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: FriendCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+        
         var newUser: User
         if self.isFiltering {
             guard let filteredUser = filteredUsers?[indexPath.item] else { return cell }
@@ -114,30 +105,19 @@ extension FriendsViewController: UICollectionViewDataSource {
             guard let allUser = users?[indexPath.item] else { return cell }
             newUser = allUser
         }
+        
         cell.nameLabel.text = newUser.name
         cell.emailLabel.text = newUser.email
         
-        if (friendIds!.contains(newUser.uid)) {
-            cell.addButton.setTitle("완료", for: .normal)
-            cell.addButton.backgroundColor = .black
-        } else {
-            cell.addButton.tag = indexPath.row
-            cell.addButton.addTarget(self, action: #selector(didTapAddButton(sender:)), for: .touchUpInside)
-        }
-        
         return cell
     }
-    
-    @objc private func didTapAddButton(sender: UIButton) {
-        sender.showAnimation {}
-        var friend: User
-        if self.isFiltering {
-            guard let filteredUser = filteredUsers?[sender.tag] else { return }
-            friend = filteredUser
-        } else {
-            guard let allUser = users?[sender.tag] else { return }
-            friend = allUser
-        }
+}
+
+// MARK: - UICollectionViewDelegate
+extension FriendsViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let viewController = ChatViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
