@@ -59,7 +59,13 @@ final class FirebaseManager: NSObject {
     func storeUserInformation(email: String, name: String, profileImage: UIImage) async {
         guard let uid = auth.currentUser?.uid else { return }
         do {
-            let profileImageUrl = self.persistImageToStorage(uid: uid, profileImage: profileImage)
+            let ref = storage.reference(withPath: uid)
+            guard let imageData = profileImage.jpegData(compressionQuality: 0.5) else { return }
+            
+            let result = try await ref.putDataAsync(imageData, metadata: nil)
+            print(result)
+            
+            let profileImageUrl = try await ref.downloadURL().absoluteString
             let appDelegate = await UIApplication.shared.delegate as! AppDelegate
             let userToken = await appDelegate.userToken
             let userData = ["email": email, "uid": uid, "name": name, "profileImageUrl": profileImageUrl, "token": userToken]
@@ -68,24 +74,6 @@ final class FirebaseManager: NSObject {
         } catch {
             print("Store User error")
         }
-    }
-    
-    func persistImageToStorage(uid: String, profileImage: UIImage) -> String {
-        let ref = storage.reference(withPath: uid)
-        guard let imageData = profileImage.jpegData(compressionQuality: 0.5) else { return "" }
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpeg"
-        
-        var profileImageUrl: String = ""
-        
-        ref.putData(imageData, metadata: metadata) { _, _ in
-            ref.downloadURL { url, _ in
-                guard let url = url else { return }
-                profileImageUrl = url.absoluteString
-            }
-        }
-        
-        return profileImageUrl
     }
     
     func getUser() async -> User? {
