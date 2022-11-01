@@ -46,18 +46,18 @@ final class ChatTableViewCell: BaseTableViewCell {
         chatUserImageView.snp.makeConstraints {
             $0.width.height.equalTo(30)
             $0.leading.equalToSuperview().inset(20)
-            $0.top.equalToSuperview().inset(12)
+            $0.top.equalToSuperview().inset(8)
         }
         
         chatLastLabel.snp.makeConstraints {
             $0.leading.equalTo(chatUserImageView.snp.trailing).offset(10)
-            $0.top.equalToSuperview().inset(10)
+            $0.top.equalToSuperview().inset(5)
             $0.width.lessThanOrEqualTo(250)
         }
         
         chatDateLabel.snp.makeConstraints {
             $0.leading.equalTo(chatLastLabel.snp.trailing).offset(10)
-            $0.top.equalToSuperview().inset(10)
+            $0.top.equalToSuperview().inset(5)
         }
     }
 }
