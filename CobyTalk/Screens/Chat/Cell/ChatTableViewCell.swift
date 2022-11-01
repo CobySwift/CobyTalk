@@ -28,7 +28,7 @@ class ChatTableViewCell: BaseTableViewCell {
     }
     
     lazy var chatDateLabel = UILabel().then {
-        $0.textColor = UIColor(hex: "#999999")
+        $0.textColor = .mainGray
         $0.font = UIFont.systemFont(ofSize: 11)
     }
     

@@ -18,6 +18,10 @@ extension UIColor {
     // MARK: - gray
 
     static var mainGray: UIColor {
+        return UIColor(hex: "#999999")
+    }
+    
+    static var gray001: UIColor {
         return UIColor(hex: "#DDDDDD")
     }
     

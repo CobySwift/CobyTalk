@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CB465F99290FD21A001549CE /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB465F98290FD21A001549CE /* FriendCollectionViewCell.swift */; };
+		CB465F99290FD21A001549CE /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB465F98290FD21A001549CE /* FriendTableViewCell.swift */; };
 		CB465F9C290FD235001549CE /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB465F9B290FD235001549CE /* FriendsViewController.swift */; };
 		CB4F8CC3290FCFC800E06D21 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = CB4F8CC2290FCFC800E06D21 /* FirebaseMessaging */; };
 		CB87BCBB290E61C500485216 /* ImageLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87BCBA290E61C500485216 /* ImageLiteral.swift */; };
@@ -51,7 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CB465F98290FD21A001549CE /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
+		CB465F98290FD21A001549CE /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		CB465F9B290FD235001549CE /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		CB87BCBA290E61C500485216 /* ImageLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiteral.swift; sourceTree = "<group>"; };
 		CB87BCBC290E61E000485216 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 		CB465F9A290FD227001549CE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				CB465F98290FD21A001549CE /* FriendCollectionViewCell.swift */,
+				CB465F98290FD21A001549CE /* FriendTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -424,7 +424,7 @@
 				CBE26660290FB92900696D9E /* AddButton.swift in Sources */,
 				CBABD128290D8B52000FB02A /* UIView+Extension.swift in Sources */,
 				CBBB2062290E6E13004128BE /* ChannelTableViewCell.swift in Sources */,
-				CB465F99290FD21A001549CE /* FriendCollectionViewCell.swift in Sources */,
+				CB465F99290FD21A001549CE /* FriendTableViewCell.swift in Sources */,
 				CBB744EB290DA3DA007ACB63 /* ChatMessage.swift in Sources */,
 				CB87BCD7290E649100485216 /* User.swift in Sources */,
 				CB87BCCE290E63A200485216 /* Logger.swift in Sources */,

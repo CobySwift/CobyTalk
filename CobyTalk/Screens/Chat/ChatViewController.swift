@@ -66,9 +66,8 @@ final class ChatViewController: BaseViewController {
     }
     
     private lazy var chatSendbutton = UIButton().then {
-        $0.backgroundColor = .mainBlack
-        $0.setTitleColor(.white, for: .normal)
-        $0.setTitle("Send", for: .normal)
+        $0.setImage(ImageLiteral.btnSend, for: .normal)
+        $0.tintColor = .mainBlack
         $0.addTarget(self, action: #selector(didTapChatSendbutton), for: .touchUpInside)
     }
     

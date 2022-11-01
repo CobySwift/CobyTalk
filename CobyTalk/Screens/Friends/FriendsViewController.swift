@@ -15,45 +15,26 @@ final class FriendsViewController: BaseViewController {
     private var currentUser: User?
     private var users: [User]? = []
     
-    private enum Size {
-        static let collectionHorizontalSpacing: CGFloat = 0
-        static let collectionVerticalSpacing: CGFloat = 0
-        static let cellWidth: CGFloat = UIScreen.main.bounds.size.width - collectionHorizontalSpacing * 2
-        static let cellHeight: CGFloat = 100
-        static let collectionInset = UIEdgeInsets(top: collectionVerticalSpacing,
-                                                  left: collectionHorizontalSpacing,
-                                                  bottom: collectionVerticalSpacing,
-                                                  right: collectionHorizontalSpacing)
-    }
-    
-    private let collectionViewFlowLayout = UICollectionViewFlowLayout().then {
-        $0.scrollDirection = .vertical
-        $0.sectionInset = Size.collectionInset
-        $0.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
-        $0.minimumLineSpacing = 10
-    }
-    
-    private lazy var listCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout).then {
-        $0.backgroundColor = .clear
-        $0.dataSource = self
+    private lazy var friendTableViewCell = UITableView().then {
+        $0.register(FriendTableViewCell.self, forCellReuseIdentifier: FriendTableViewCell.className)
         $0.delegate = self
-        $0.showsVerticalScrollIndicator = false
-        $0.register(cell: FriendCollectionViewCell.self,
-                                forCellWithReuseIdentifier: FriendCollectionViewCell.className)
+        $0.dataSource = self
+        
+        $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     override func render() {
-        view.addSubview(listCollectionView)
+        view.addSubview(friendTableViewCell)
         
-        listCollectionView.snp.makeConstraints {
-            $0.top.bottom.leading.trailing.equalToSuperview()
+        friendTableViewCell.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
         Task { [weak self] in
             self?.currentUser = await FirebaseManager.shared.getUser()
             self?.users = await FirebaseManager.shared.getUsers()
             DispatchQueue.main.async {
-                self?.listCollectionView.reloadData()
+                self?.friendTableViewCell.reloadData()
             }
         }
     }
@@ -68,15 +49,16 @@ final class FriendsViewController: BaseViewController {
     }
 }
 
-// MARK: - UICollectionViewDataSource
-extension FriendsViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let users = users else { return 0 }
         return users.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: FriendCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FriendTableViewCell.className, for: indexPath) as! FriendTableViewCell
+        
+        cell.selectionStyle = .none
         
         guard let user = users?[indexPath.item] else { return cell }
         
@@ -85,14 +67,16 @@ extension FriendsViewController: UICollectionViewDataSource {
         
         return cell
     }
-}
-
-// MARK: - UICollectionViewDelegate
-extension FriendsViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let currentUser = currentUser else { return }
         guard let chatUser = users?[indexPath.row] else { return }
         let viewController = ChatViewController(name: chatUser.name, fromId: currentUser.uid, toId: chatUser.uid)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
+
