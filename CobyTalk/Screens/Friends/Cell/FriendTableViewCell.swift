@@ -15,8 +15,6 @@ final class FriendTableViewCell: BaseTableViewCell {
     // MARK: - property
     
     lazy var userImageView = UIImageView().then {
-        let url = URL(string: "https://picsum.photos/600/600/?random")
-        $0.load(url: url!)
         $0.layer.cornerRadius = 20
         $0.layer.masksToBounds = true
     }

@@ -165,7 +165,8 @@ extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.selectionStyle = .none
         
-        cell.chatUserNameLabel.text = recentMessages[indexPath.row].userName
+        cell.chatUserImageView.load(url: URL(string: recentMessages[indexPath.row].profileImageUrl)!)
+        cell.chatUserNameLabel.text = recentMessages[indexPath.row].chatUserName
         cell.chatLastLabel.text = recentMessages[indexPath.row].text
         cell.chatDateLabel.text = recentMessages[indexPath.row].timeAgo
         
@@ -178,7 +179,7 @@ extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let recentMessage = recentMessages[indexPath.row]
-        let viewController = ChatViewController(name: recentMessage.userName, fromId: recentMessage.fromId, toId: recentMessage.toId)
+        let viewController = ChatViewController(name: recentMessage.chatUserName, fromId: recentMessage.fromId, toId: recentMessage.toId)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

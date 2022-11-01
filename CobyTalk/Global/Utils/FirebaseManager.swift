@@ -56,17 +56,44 @@ final class FirebaseManager: NSObject {
         }
     }
     
-    func storeUserInformation(email: String, name: String) async {
+    func storeUserInformation(email: String, name: String, profileImage: UIImage) async {
         guard let uid = auth.currentUser?.uid else { return }
         do {
+            let profileImageUrl = self.persistImageToStorage(uid: uid, profileImage: profileImage)
             let appDelegate = await UIApplication.shared.delegate as! AppDelegate
             let userToken = await appDelegate.userToken
-            let userData = ["email": email, "uid": uid, "name": name, "token": userToken]
+            let userData = ["email": email, "uid": uid, "name": name, "profileImageUrl": profileImageUrl, "token": userToken]
         
             try await firestore.collection("users").document(uid).setData(userData)
         } catch {
             print("Store User error")
         }
+    }
+    
+    func persistImageToStorage(uid: String, profileImage: UIImage) -> String {
+        let ref = storage.reference(withPath: uid)
+        guard let imageData = profileImage.jpegData(compressionQuality: 0.5) else { return "" }
+        
+        var profileImageUrl: String = ""
+        
+        ref.putData(imageData, metadata: nil) { metadata, err in
+            if err != nil {
+                return
+            }
+            
+            ref.downloadURL { url, err in
+                if err != nil {
+                    return
+                }
+                
+                print(url?.absoluteString ?? "")
+                
+                guard let url = url else { return }
+                profileImageUrl = url.absoluteString
+            }
+        }
+        
+        return profileImageUrl
     }
     
     func getUser() async -> User? {
@@ -177,7 +204,8 @@ final class FirebaseManager: NSObject {
             "text": chatText,
             "fromId": fromId,
             "toId": toId,
-            "userName": chatUser.name
+            "profileImageUrl": currentUser.profileImageUrl,
+            "chatUserName": chatUser.name
         ] as [String : Any]
    
         document.setData(data) { error in
@@ -198,7 +226,8 @@ final class FirebaseManager: NSObject {
             "text": chatText,
             "fromId": toId,
             "toId": fromId,
-            "userName": currentUser.name
+            "profileImageUrl": chatUser.profileImageUrl,
+            "chatUserName": currentUser.name
         ] as [String : Any]
         
         recipientMessageDocument.setData(recipientMessageData) { error in

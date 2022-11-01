@@ -62,6 +62,7 @@ extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
         
         guard let user = users?[indexPath.item] else { return cell }
         
+        cell.userImageView.load(url: URL(string: user.profileImageUrl)!)
         cell.nameLabel.text = user.name
         cell.emailLabel.text = user.email
         

@@ -121,7 +121,7 @@ final class SignUpViewController: BaseViewController {
         
         Task {
             await FirebaseManager.shared.createNewAccount(email: email, password: password)
-            await FirebaseManager.shared.storeUserInformation(email: email, name: name)
+//            await FirebaseManager.shared.storeUserInformation(email: email, name: name, profileImage: profileImage)
         }
         
         let navigationController = UINavigationController(rootViewController: ChannelsViewController())
