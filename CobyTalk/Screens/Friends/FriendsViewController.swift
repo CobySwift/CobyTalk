@@ -14,14 +14,6 @@ final class FriendsViewController: BaseViewController {
     
     private var currentUser: User?
     private var users: [User]? = []
-    private var filteredUsers: [User]? = []
-    
-    private var isFiltering: Bool {
-        let searchController = self.navigationItem.searchController
-        let isActive = searchController?.isActive ?? false
-        let isSearchBarHasText = searchController?.searchBar.text?.isEmpty == false
-        return isActive && isSearchBarHasText
-    }
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 0
@@ -79,11 +71,8 @@ final class FriendsViewController: BaseViewController {
 // MARK: - UICollectionViewDataSource
 extension FriendsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let filteredUsersCount = filteredUsers?.count, let usersCount = users?.count else {
-            return 0
-        }
-        
-        return self.isFiltering ? filteredUsersCount : usersCount
+        guard let users = users else { return 0 }
+        return users.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

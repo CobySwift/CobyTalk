@@ -45,6 +45,7 @@
 		CBB744EB290DA3DA007ACB63 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB744EA290DA3DA007ACB63 /* ChatMessage.swift */; };
 		CBB744ED290DA3F8007ACB63 /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB744EC290DA3F8007ACB63 /* RecentMessage.swift */; };
 		CBBB2062290E6E13004128BE /* ChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2061290E6E13004128BE /* ChannelTableViewCell.swift */; };
+		CBD569ED2910A5770035C681 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD569EC2910A5770035C681 /* ChatTableViewCell.swift */; };
 		CBE2665E290FB8EA00696D9E /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE2665D290FB8EA00696D9E /* CloseButton.swift */; };
 		CBE26660290FB92900696D9E /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE2665F290FB92900696D9E /* AddButton.swift */; };
 /* End PBXBuildFile section */
@@ -84,6 +85,7 @@
 		CBB744EC290DA3F8007ACB63 /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
 		CBBB2061290E6E13004128BE /* ChannelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTableViewCell.swift; sourceTree = "<group>"; };
 		CBD569EA291009800035C681 /* CobyTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CobyTalk.entitlements; sourceTree = "<group>"; };
+		CBD569EC2910A5770035C681 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		CBE2665D290FB8EA00696D9E /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		CBE2665F290FB92900696D9E /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -304,6 +306,7 @@
 		CBABD129290D8B83000FB02A /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				CBD569EB2910A4E20035C681 /* Cell */,
 				CBABD0FA290D8847000FB02A /* ChatViewController.swift */,
 			);
 			path = Chat;
@@ -320,6 +323,14 @@
 			isa = PBXGroup;
 			children = (
 				CBBB2061290E6E13004128BE /* ChannelTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		CBD569EB2910A4E20035C681 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CBD569EC2910A5770035C681 /* ChatTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -435,6 +446,7 @@
 				CBABD126290D8B42000FB02A /* UIImage+Extension.swift in Sources */,
 				CB87BCC5290E62AE00485216 /* UITableView+Extension.swift in Sources */,
 				CB87BCBB290E61C500485216 /* ImageLiteral.swift in Sources */,
+				CBD569ED2910A5770035C681 /* ChatTableViewCell.swift in Sources */,
 				CBB744ED290DA3F8007ACB63 /* RecentMessage.swift in Sources */,
 				CBABD12B290D8B9F000FB02A /* LogInViewController.swift in Sources */,
 				CB87BCCB290E638800485216 /* BackButton.swift in Sources */,

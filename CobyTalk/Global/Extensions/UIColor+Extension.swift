@@ -9,14 +9,28 @@ import UIKit
 
 extension UIColor {
     
-    // MARK: - red
+    // MARK: - black
 
     static var mainBlack: UIColor {
         return UIColor(hex: "#182629")
     }
     
-    static var mainYellow: UIColor {
-        return UIColor(hex: "#DDC328")
+    // MARK: - gray
+
+    static var mainGray: UIColor {
+        return UIColor(hex: "#DDDDDD")
+    }
+    
+    // MARK: - pink
+    
+    static var mainPink: UIColor {
+        return UIColor(hex: "#FF9DA4")
+    }
+    
+    // MARK: - blue
+    
+    static var mainBlue: UIColor {
+        return UIColor(hex: "#B4CDDB")
     }
 }
 

@@ -41,6 +41,14 @@ final class ChatViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private lazy var chatTableView = UITableView().then {
+        $0.register(ChatTableViewCell.self, forCellReuseIdentifier: ChatTableViewCell.className)
+        $0.delegate = self
+        $0.dataSource = self
+        
+        $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
     private let chatTextField = UITextField().then {
         let attributes = [
             NSAttributedString.Key.foregroundColor : UIColor.mainBlack,
@@ -65,7 +73,11 @@ final class ChatViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(chatTextField, chatSendbutton)
+        view.addSubviews(chatTableView, chatTextField, chatSendbutton)
+        
+        chatTableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
         chatTextField.snp.makeConstraints {
             $0.leading.equalToSuperview()
@@ -123,7 +135,7 @@ final class ChatViewController: BaseViewController {
         }) else {
             return
         }
-//        channelTableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        chatTableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
     }
     
     private func updateChatMessageInTable(_ chatMessage: ChatMessage) {
@@ -135,7 +147,7 @@ final class ChatViewController: BaseViewController {
         }
         
         chatMessages[index] = chatMessage
-//        channelTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        chatTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
     }
     
     private func removeChatMessageFromTable(_ chatMessage: ChatMessage) {
@@ -147,7 +159,7 @@ final class ChatViewController: BaseViewController {
         }
         
         chatMessages.remove(at: index)
-//        channelTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        chatTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
     }
     
     private func handleDocumentChange(_ change: DocumentChange) {
@@ -170,5 +182,27 @@ final class ChatViewController: BaseViewController {
         FirebaseManager.shared.createChatMessage(currentUser: currentUser, chatUser: chatUser, chatText: chatText)
         PushNotificationSender().sendPushNotification(to: chatUser.token, title: currentUser.name, body: chatText)
         chatTextField.text = ""
+    }
+}
+
+extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return chatMessages.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.className, for: indexPath) as! ChatTableViewCell
+        
+        cell.selectionStyle = .none
+        
+        cell.chatUserNameLabel.text = name
+        cell.chatLastLabel.text = chatMessages[indexPath.row].text
+        cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
     }
 }
