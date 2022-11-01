@@ -15,8 +15,6 @@ final class MyChatTableViewCell: BaseTableViewCell {
     // MARK: - property
     
     lazy var chatUserImageView = UIImageView().then {
-        let url = URL(string: "https://picsum.photos/600/600/?random")
-        $0.load(url: url!)
         $0.layer.cornerRadius = 15
         $0.layer.masksToBounds = true
     }
