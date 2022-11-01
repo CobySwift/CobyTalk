@@ -47,6 +47,7 @@
 		CBBB2062290E6E13004128BE /* ChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2061290E6E13004128BE /* ChannelTableViewCell.swift */; };
 		CBD569ED2910A5770035C681 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD569EC2910A5770035C681 /* ChatTableViewCell.swift */; };
 		CBD569EF2910B7DD0035C681 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD569EE2910B7DD0035C681 /* PaddingLabel.swift */; };
+		CBD569F12910E5450035C681 /* MyChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD569F02910E5450035C681 /* MyChatTableViewCell.swift */; };
 		CBE2665E290FB8EA00696D9E /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE2665D290FB8EA00696D9E /* CloseButton.swift */; };
 		CBE26660290FB92900696D9E /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE2665F290FB92900696D9E /* AddButton.swift */; };
 /* End PBXBuildFile section */
@@ -88,6 +89,7 @@
 		CBD569EA291009800035C681 /* CobyTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CobyTalk.entitlements; sourceTree = "<group>"; };
 		CBD569EC2910A5770035C681 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		CBD569EE2910B7DD0035C681 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		CBD569F02910E5450035C681 /* MyChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatTableViewCell.swift; sourceTree = "<group>"; };
 		CBE2665D290FB8EA00696D9E /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		CBE2665F290FB92900696D9E /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -334,6 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				CBD569EC2910A5770035C681 /* ChatTableViewCell.swift */,
+				CBD569F02910E5450035C681 /* MyChatTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				CBABD12D290D8BAF000FB02A /* ChannelsViewController.swift in Sources */,
 				CB87BCD0290E63B200485216 /* PushNotificationSender.swift in Sources */,
 				CB87BCD3290E640D00485216 /* SignUpViewController.swift in Sources */,
+				CBD569F12910E5450035C681 /* MyChatTableViewCell.swift in Sources */,
 				CB87BCC3290E629C00485216 /* NSObject+Extension.swift in Sources */,
 				CB87BCC9290E635300485216 /* UILabel+Extension.swift in Sources */,
 				CBABD126290D8B42000FB02A /* UIImage+Extension.swift in Sources */,

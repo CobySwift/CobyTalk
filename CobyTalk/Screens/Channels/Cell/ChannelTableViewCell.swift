@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-class ChannelTableViewCell: BaseTableViewCell {
+final class ChannelTableViewCell: BaseTableViewCell {
     
     // MARK: - property
     

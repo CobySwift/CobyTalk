@@ -1,5 +1,5 @@
 //
-//  ChatTableViewCell.swift
+//  MyChatTableViewCell.swift
 //  CobyTalk
 //
 //  Created by COBY_PRO on 2022/11/01.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class ChatTableViewCell: BaseTableViewCell {
+final class MyChatTableViewCell: BaseTableViewCell {
     
     // MARK: - property
     
@@ -30,7 +30,7 @@ final class ChatTableViewCell: BaseTableViewCell {
         $0.numberOfLines = 0
         $0.textColor = .white
         $0.font = UIFont.systemFont(ofSize: 15)
-        $0.backgroundColor = .mainBlue
+        $0.backgroundColor = .mainPink
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
     }
@@ -38,27 +38,21 @@ final class ChatTableViewCell: BaseTableViewCell {
     // MARK: - func
     
     override func render() {
-        contentView.addSubviews(chatUserImageView, chatLastLabel, chatDateLabel)
+        contentView.addSubviews(chatLastLabel, chatDateLabel)
         
         contentView.snp.makeConstraints {
             $0.width.equalTo(UIScreen.main.bounds.size.width)
             $0.height.equalTo(chatLastLabel.snp.height).offset(10)
         }
         
-        chatUserImageView.snp.makeConstraints {
-            $0.width.height.equalTo(30)
-            $0.leading.equalToSuperview().inset(20)
-            $0.top.equalToSuperview().inset(12)
-        }
-        
         chatLastLabel.snp.makeConstraints {
-            $0.leading.equalTo(chatUserImageView.snp.trailing).offset(20)
+            $0.trailing.equalToSuperview().inset(20)
             $0.top.equalToSuperview().inset(10)
             $0.width.lessThanOrEqualTo(250)
         }
         
         chatDateLabel.snp.makeConstraints {
-            $0.leading.equalTo(chatLastLabel.snp.trailing).offset(10)
+            $0.trailing.equalTo(chatLastLabel.snp.leading).offset(10)
             $0.top.equalToSuperview().inset(10)
         }
     }
