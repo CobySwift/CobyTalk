@@ -69,16 +69,6 @@ final class ChatViewController: BaseViewController {
         $0.addTarget(self, action: #selector(didTapChatSendbutton), for: .touchUpInside)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
     override func render() {
         view.addSubviews(chatTableView, chatTextField, chatSendbutton)
         
@@ -192,23 +182,6 @@ final class ChatViewController: BaseViewController {
             let indexPath = IndexPath(row: self.chatMessages.count - 1, section: 0)
             self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
-    }
-    
-    @objc func keyboardUp(notification:NSNotification) {
-        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-           let keyboardRectangle = keyboardFrame.cgRectValue
-       
-            UIView.animate(
-                withDuration: 0.3
-                , animations: {
-                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
-                }
-            )
-        }
-    }
-    
-    @objc func keyboardDown() {
-        self.view.transform = .identity
     }
     
     @objc private func didTapChatSendbutton() {
