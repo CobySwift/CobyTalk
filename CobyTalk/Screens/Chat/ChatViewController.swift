@@ -47,47 +47,21 @@ final class ChatViewController: BaseViewController {
         $0.separatorStyle = .none
     }
     
-    private let chatTextField = UITextField().then {
-        let attributes = [
-            NSAttributedString.Key.foregroundColor : UIColor.mainBlack,
-            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17, weight: .regular)
-        ]
-        
-        $0.backgroundColor = .white
-        $0.autocapitalizationType = .none
-        $0.layer.cornerRadius = 12
-        $0.layer.masksToBounds = true
-        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        $0.leftViewMode = .always
-        $0.clipsToBounds = false
-        $0.makeShadow(color: .black, opacity: 0.08, offset: CGSize(width: 0, height: 4), radius: 20)
-    }
-    
-    private lazy var chatSendbutton = UIButton().then {
-        $0.setImage(ImageLiteral.btnSend, for: .normal)
-        $0.tintColor = .mainBlack
-        $0.addTarget(self, action: #selector(didTapChatSendbutton), for: .touchUpInside)
+    private lazy var chatSendView = ChatSendView().then {
+        $0.chatSendbutton.addTarget(self, action: #selector(didTapChatSendbutton), for: .touchUpInside)
     }
     
     override func render() {
-        view.addSubviews(chatTableView, chatTextField, chatSendbutton)
+        view.addSubviews(chatSendView, chatTableView)
+        
+        chatSendView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
         
         chatTableView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(chatTextField.snp.top).inset(20)
-        }
-        
-        chatTextField.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-            $0.trailing.equalTo(chatSendbutton.snp.leading)
-            $0.height.equalTo(40)
-        }
-        
-        chatSendbutton.snp.makeConstraints {
-            $0.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-            $0.width.height.equalTo(40)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-60)
         }
         
         Task { [weak self] in
@@ -186,11 +160,11 @@ final class ChatViewController: BaseViewController {
     
     @objc private func didTapChatSendbutton() {
         guard let currentUser = currentUser, let chatUser = chatUser else { return }
-        guard chatTextField.text != "", let chatText = chatTextField.text else { return }
+        guard chatSendView.chatTextField.text != "", let chatText = chatSendView.chatTextField.text else { return }
         
         FirebaseManager.shared.createChatMessage(currentUser: currentUser, chatUser: chatUser, chatText: chatText)
         PushNotificationSender().sendPushNotification(to: chatUser.token, title: currentUser.name, body: chatText)
-        chatTextField.text = ""
+        chatSendView.chatTextField.text = ""
     }
 }
 

@@ -48,6 +48,8 @@
 		CBD569ED2910A5770035C681 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD569EC2910A5770035C681 /* ChatTableViewCell.swift */; };
 		CBD569EF2910B7DD0035C681 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD569EE2910B7DD0035C681 /* PaddingLabel.swift */; };
 		CBD569F12910E5450035C681 /* MyChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD569F02910E5450035C681 /* MyChatTableViewCell.swift */; };
+		CBD569F42910F47B0035C681 /* ChatSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD569F32910F47B0035C681 /* ChatSendView.swift */; };
+		CBD569F72910FC220035C681 /* SendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD569F62910FC220035C681 /* SendButton.swift */; };
 		CBE2665E290FB8EA00696D9E /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE2665D290FB8EA00696D9E /* CloseButton.swift */; };
 		CBE26660290FB92900696D9E /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE2665F290FB92900696D9E /* AddButton.swift */; };
 /* End PBXBuildFile section */
@@ -90,6 +92,8 @@
 		CBD569EC2910A5770035C681 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		CBD569EE2910B7DD0035C681 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		CBD569F02910E5450035C681 /* MyChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatTableViewCell.swift; sourceTree = "<group>"; };
+		CBD569F32910F47B0035C681 /* ChatSendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSendView.swift; sourceTree = "<group>"; };
+		CBD569F62910FC220035C681 /* SendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendButton.swift; sourceTree = "<group>"; };
 		CBE2665D290FB8EA00696D9E /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		CBE2665F290FB92900696D9E /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +157,7 @@
 				CB87BCCA290E638800485216 /* BackButton.swift */,
 				CBE2665D290FB8EA00696D9E /* CloseButton.swift */,
 				CBE2665F290FB92900696D9E /* AddButton.swift */,
+				CBD569F62910FC220035C681 /* SendButton.swift */,
 				CBD569EE2910B7DD0035C681 /* PaddingLabel.swift */,
 			);
 			path = UIComponent;
@@ -311,6 +316,7 @@
 		CBABD129290D8B83000FB02A /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				CBD569F22910F4460035C681 /* UIComponent */,
 				CBD569EB2910A4E20035C681 /* Cell */,
 				CBABD0FA290D8847000FB02A /* ChatViewController.swift */,
 			);
@@ -339,6 +345,14 @@
 				CBD569F02910E5450035C681 /* MyChatTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		CBD569F22910F4460035C681 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				CBD569F32910F47B0035C681 /* ChatSendView.swift */,
+			);
+			path = UIComponent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,6 +447,7 @@
 				CBD569EF2910B7DD0035C681 /* PaddingLabel.swift in Sources */,
 				CB465F99290FD21A001549CE /* FriendTableViewCell.swift in Sources */,
 				CBB744EB290DA3DA007ACB63 /* ChatMessage.swift in Sources */,
+				CBD569F72910FC220035C681 /* SendButton.swift in Sources */,
 				CB87BCD7290E649100485216 /* User.swift in Sources */,
 				CB87BCCE290E63A200485216 /* Logger.swift in Sources */,
 				CBABD0FB290D8847000FB02A /* ChatViewController.swift in Sources */,
@@ -454,6 +469,7 @@
 				CBABD126290D8B42000FB02A /* UIImage+Extension.swift in Sources */,
 				CB87BCC5290E62AE00485216 /* UITableView+Extension.swift in Sources */,
 				CB87BCBB290E61C500485216 /* ImageLiteral.swift in Sources */,
+				CBD569F42910F47B0035C681 /* ChatSendView.swift in Sources */,
 				CBD569ED2910A5770035C681 /* ChatTableViewCell.swift in Sources */,
 				CBB744ED290DA3F8007ACB63 /* RecentMessage.swift in Sources */,
 				CBABD12B290D8B9F000FB02A /* LogInViewController.swift in Sources */,
