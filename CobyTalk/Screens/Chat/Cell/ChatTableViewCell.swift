@@ -17,14 +17,8 @@ class ChatTableViewCell: BaseTableViewCell {
     lazy var chatUserImageView = UIImageView().then {
         let url = URL(string: "https://picsum.photos/600/600/?random")
         $0.load(url: url!)
-        $0.layer.cornerRadius = 20
+        $0.layer.cornerRadius = 15
         $0.layer.masksToBounds = true
-    }
-    
-    lazy var chatUserNameLabel = UILabel().then {
-        $0.textColor = .mainBlack
-        $0.font = UIFont.systemFont(ofSize: 15)
-        $0.font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
     }
     
     lazy var chatDateLabel = UILabel().then {
@@ -32,35 +26,33 @@ class ChatTableViewCell: BaseTableViewCell {
         $0.font = UIFont.systemFont(ofSize: 11)
     }
     
-    lazy var chatLastLabel = UILabel().then {
-        $0.textColor = .mainBlack
-        $0.font = UIFont.systemFont(ofSize: 13)
+    lazy var chatLastLabel = PaddingLabel().then {
+        $0.textColor = .white
+        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.backgroundColor = .mainBlue
+        $0.layer.cornerRadius = 10
+        $0.clipsToBounds = true
     }
     
     // MARK: - func
     
     override func render() {
-        contentView.addSubviews(chatUserImageView, chatUserNameLabel, chatDateLabel, chatLastLabel)
+        contentView.addSubviews(chatUserImageView, chatLastLabel)
+        
+        contentView.snp.makeConstraints {
+            $0.width.equalTo(UIScreen.main.bounds.size.width)
+            $0.height.equalTo(chatLastLabel.snp.height).offset(20)
+        }
         
         chatUserImageView.snp.makeConstraints {
-            $0.width.height.equalTo(40)
+            $0.width.height.equalTo(30)
             $0.leading.equalToSuperview().inset(20)
-            $0.centerY.equalToSuperview()
-        }
-        
-        chatUserNameLabel.snp.makeConstraints {
-            $0.leading.equalTo(chatUserImageView.snp.trailing).offset(20)
-            $0.top.equalToSuperview().inset(14)
-        }
-        
-        chatDateLabel.snp.makeConstraints {
-            $0.leading.equalTo(chatUserNameLabel.snp.trailing).offset(10)
-            $0.top.equalToSuperview().inset(18)
+            $0.top.equalToSuperview().inset(12)
         }
         
         chatLastLabel.snp.makeConstraints {
             $0.leading.equalTo(chatUserImageView.snp.trailing).offset(20)
-            $0.bottom.equalToSuperview().inset(14)
+            $0.top.equalToSuperview().inset(10)
         }
     }
 }

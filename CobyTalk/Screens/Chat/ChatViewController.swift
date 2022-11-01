@@ -46,7 +46,7 @@ final class ChatViewController: BaseViewController {
         $0.delegate = self
         $0.dataSource = self
         
-        $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        $0.separatorStyle = .none
     }
     
     private let chatTextField = UITextField().then {
@@ -194,14 +194,9 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.selectionStyle = .none
         
-        cell.chatUserNameLabel.text = name
         cell.chatLastLabel.text = chatMessages[indexPath.row].text
         cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
         
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
     }
 }
