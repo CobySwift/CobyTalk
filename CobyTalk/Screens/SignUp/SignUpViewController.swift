@@ -12,6 +12,17 @@ import Then
 
 final class SignUpViewController: BaseViewController {
     
+    let imagePicker = UIImagePickerController()
+    
+    private lazy var photoImageView = UIImageView().then {
+        $0.image = ImageLiteral.btnProfile
+        $0.layer.cornerRadius = 40
+        $0.clipsToBounds = true
+        
+        $0.isUserInteractionEnabled = true
+        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(selectButtonTouched)))
+    }
+    
     private let emailField = UITextField().then {
         let attributes = [
             NSAttributedString.Key.foregroundColor : UIColor.mainBlack,
@@ -63,20 +74,33 @@ final class SignUpViewController: BaseViewController {
         $0.makeShadow(color: .black, opacity: 0.08, offset: CGSize(width: 0, height: 4), radius: 20)
     }
 
-    private let signUpButton = UIButton().then {
+    private lazy var signUpButton = UIButton().then {
         $0.backgroundColor = .mainBlack
         $0.setTitleColor(.white, for: .normal)
         $0.setTitle("Start", for: .normal)
         $0.layer.cornerRadius = 12
+        $0.addTarget(self, action: #selector(didTapSignUpButton), for: .touchUpInside)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        imagePicker.sourceType = .photoLibrary  // 앨범에서 가져옴
+        imagePicker.allowsEditing = true        // 수정가능 여부
+        imagePicker.delegate = self             // picker delegate
     }
 
     override func render() {
-        view.addSubviews(emailField, passwordField, nameField, signUpButton)
+        view.addSubviews(photoImageView, emailField, passwordField, nameField, signUpButton)
         
-        signUpButton.addTarget(self, action: #selector(didTapSignUpButton), for: .touchUpInside)
+        photoImageView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.centerX.equalToSuperview()
+            $0.height.width.equalTo(80)
+        }
         
         emailField.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.top.equalTo(photoImageView.snp.bottom).offset(30)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(60)
         }
@@ -111,21 +135,43 @@ final class SignUpViewController: BaseViewController {
         title = "Sign Up"
     }
     
+    
+    @objc private func selectButtonTouched(_ recognizer: UITapGestureRecognizer) {
+        self.present(imagePicker, animated: true)
+    }
+    
     @objc private func didTapSignUpButton() {
         guard let email = emailField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty,
-              let name = nameField.text, !name.isEmpty else {
+              let name = nameField.text, !name.isEmpty,
+              let profileImage = photoImageView.image
+        else {
             print("Missing field data")
             return
         }
         
         Task {
             await FirebaseManager.shared.createNewAccount(email: email, password: password)
-//            await FirebaseManager.shared.storeUserInformation(email: email, name: name, profileImage: profileImage)
+            await FirebaseManager.shared.storeUserInformation(email: email, name: name, profileImage: profileImage)
         }
         
         let navigationController = UINavigationController(rootViewController: ChannelsViewController())
         navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true, completion: nil)
+    }
+}
+
+extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        var newImage : UIImage? = nil // update 할 이미지
+        
+        if let possibleImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            newImage = possibleImage    // 수정된 이미지가 있을 경우
+        } else if let possibleImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            newImage = possibleImage        // 원본 이미지가 있을 경우
+        }
+        self.photoImageView.image = newImage
+        dismiss(animated: true, completion: nil)
     }
 }
