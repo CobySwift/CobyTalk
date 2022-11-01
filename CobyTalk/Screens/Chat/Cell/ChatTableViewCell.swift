@@ -27,6 +27,7 @@ class ChatTableViewCell: BaseTableViewCell {
     }
     
     lazy var chatLastLabel = PaddingLabel().then {
+        $0.numberOfLines = 0
         $0.textColor = .white
         $0.font = UIFont.systemFont(ofSize: 15)
         $0.backgroundColor = .mainBlue
@@ -53,6 +54,7 @@ class ChatTableViewCell: BaseTableViewCell {
         chatLastLabel.snp.makeConstraints {
             $0.leading.equalTo(chatUserImageView.snp.trailing).offset(20)
             $0.top.equalToSuperview().inset(10)
+            $0.width.lessThanOrEqualTo(250)
         }
     }
 }
