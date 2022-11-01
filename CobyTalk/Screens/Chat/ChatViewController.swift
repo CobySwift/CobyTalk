@@ -55,13 +55,13 @@ final class ChatViewController: BaseViewController {
         view.addSubviews(chatSendView, chatTableView)
         
         chatSendView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(5)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
         chatTableView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-60)
+            $0.bottom.equalTo(chatSendView.snp.top)
         }
         
         Task { [weak self] in

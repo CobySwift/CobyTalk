@@ -20,14 +20,10 @@ final class ChatSendView: UIView {
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17, weight: .regular)
         ]
         
-        $0.backgroundColor = .white
         $0.autocapitalizationType = .none
-        $0.layer.cornerRadius = 12
-        $0.layer.masksToBounds = true
-        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
         $0.leftViewMode = .always
         $0.clipsToBounds = false
-        $0.makeShadow(color: .black, opacity: 0.08, offset: CGSize(width: 0, height: 4), radius: 20)
     }
     
     let chatSendbutton = SendButton()
@@ -51,12 +47,11 @@ final class ChatSendView: UIView {
         
         self.snp.makeConstraints {
             $0.width.equalTo(UIScreen.main.bounds.size.width)
-            $0.height.equalTo(50)
+            $0.height.equalTo(40)
         }
         
         chatTextField.snp.makeConstraints {
-            $0.top.bottom.leading.equalToSuperview().inset(5)
-            $0.trailing.equalTo(chatSendbutton.snp.leading)
+            $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
         chatSendbutton.snp.makeConstraints {
@@ -66,6 +61,8 @@ final class ChatSendView: UIView {
     }
     
     private func configUI() {
-        self.backgroundColor = .gray001
+        self.layer.borderWidth = 0.3
+        self.layer.borderColor = UIColor.mainGray.cgColor
+        self.layer.cornerRadius = 20
     }
 }
