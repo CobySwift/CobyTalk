@@ -73,21 +73,13 @@ final class FirebaseManager: NSObject {
     func persistImageToStorage(uid: String, profileImage: UIImage) -> String {
         let ref = storage.reference(withPath: uid)
         guard let imageData = profileImage.jpegData(compressionQuality: 0.5) else { return "" }
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
         
         var profileImageUrl: String = ""
         
-        ref.putData(imageData, metadata: nil) { metadata, err in
-            if err != nil {
-                return
-            }
-            
-            ref.downloadURL { url, err in
-                if err != nil {
-                    return
-                }
-                
-                print(url?.absoluteString ?? "")
-                
+        ref.putData(imageData, metadata: metadata) { _, _ in
+            ref.downloadURL { url, _ in
                 guard let url = url else { return }
                 profileImageUrl = url.absoluteString
             }
