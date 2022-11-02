@@ -54,6 +54,8 @@ final class ChatViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        hidekeyboardWhenTappedAroundExceptSendView()
         fetchData()
     }
     
@@ -195,6 +197,12 @@ final class ChatViewController: BaseViewController {
         }
         
         scrollToBottom()
+    }
+    
+    func hidekeyboardWhenTappedAroundExceptSendView() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        chatTableView.addGestureRecognizer(tap)
     }
 }
 

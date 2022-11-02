@@ -12,7 +12,11 @@ import Then
 
 final class SignUpViewController: BaseViewController {
     
-    let imagePicker = UIImagePickerController()
+    private lazy var imagePicker = UIImagePickerController().then {
+        $0.sourceType = .photoLibrary
+        $0.allowsEditing = true
+        $0.delegate = self
+    }
     
     private lazy var photoImageView = UIImageView().then {
         $0.image = ImageLiteral.btnProfile
@@ -84,10 +88,12 @@ final class SignUpViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        imagePicker.sourceType = .photoLibrary  // 앨범에서 가져옴
-        imagePicker.allowsEditing = true        // 수정가능 여부
-        imagePicker.delegate = self             // picker delegate
+        hidekeyboardWhenTappedAround()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        emailField.becomeFirstResponder()
     }
 
     override func render() {
@@ -122,11 +128,6 @@ final class SignUpViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(60)
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        emailField.becomeFirstResponder()
     }
     
     override func setupNavigationBar() {

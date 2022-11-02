@@ -26,7 +26,7 @@ class BaseViewController: UIViewController {
         render()
         configUI()
         setupBackButton()
-        hidekeyboardWhenTappedAround()
+//        hidekeyboardWhenTappedAround()
         setupNavigationBar()
         
         // Do any additional setup after loading the view.

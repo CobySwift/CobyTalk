@@ -73,6 +73,17 @@ final class LogInViewController: BaseViewController {
         $0.textColor = .mainBlack
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        hidekeyboardWhenTappedAround()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        emailField.becomeFirstResponder()
+    }
+    
     override func render() {
         view.addSubviews(loginLabel, emailField, passwordField, logInbutton, signUpButton, logInErrorLabel)
         
@@ -116,11 +127,6 @@ final class LogInViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
         self.navigationItem.leftBarButtonItem = nil
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        emailField.becomeFirstResponder()
     }
     
     @objc private func didTapLogInbutton() {
