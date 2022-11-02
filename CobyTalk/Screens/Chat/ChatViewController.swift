@@ -64,7 +64,11 @@ final class ChatViewController: BaseViewController {
         
         chatSendView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(10)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(5)
+            if #available(iOS 15.0, *) {
+                $0.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-5)
+            } else {
+                // Fallback on earlier versions
+            }
         }
         
         chatTableView.snp.makeConstraints {
@@ -163,8 +167,11 @@ final class ChatViewController: BaseViewController {
     
     private func scrollToBottom() {
         DispatchQueue.main.async {
-            let indexPath = IndexPath(row: self.chatMessages.count - 1, section: 0)
-            self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            let index = self.chatMessages.count - 1
+            if index >= 0 {
+                let indexPath = IndexPath(row: index, section: 0)
+                self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            }
         }
     }
     
@@ -184,18 +191,10 @@ final class ChatViewController: BaseViewController {
     }
     
     @objc override func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
+        scrollToBottom()
     }
 
     @objc override func keyboardWillHide(notification: NSNotification) {
-        if view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
-        
         scrollToBottom()
     }
     
