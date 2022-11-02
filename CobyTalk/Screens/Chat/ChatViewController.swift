@@ -22,6 +22,7 @@ final class ChatViewController: BaseViewController {
     
     private var currentUser: User?
     private var chatUser: User?
+    private var chatUserProfileImage: UIImage?
     
     private var firestoreListener: ListenerRegistration?
     
@@ -51,6 +52,11 @@ final class ChatViewController: BaseViewController {
         $0.chatSendbutton.addTarget(self, action: #selector(didTapChatSendbutton), for: .touchUpInside)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fetchData()
+    }
+    
     override func render() {
         view.addSubviews(chatSendView, chatTableView)
         
@@ -63,7 +69,9 @@ final class ChatViewController: BaseViewController {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(chatSendView.snp.top).offset(-10)
         }
-        
+    }
+    
+    private func fetchData() {
         Task { [weak self] in
             self?.currentUser = await FirebaseManager.shared.getUser()
             self?.chatUser = await FirebaseManager.shared.getUserWithId(id: toId)
@@ -158,11 +166,15 @@ final class ChatViewController: BaseViewController {
         }
     }
     
-    private func isFirstChat(index: Int) -> Bool {
-        if index == 0 { return true }
-        if chatMessages[index].fromId != chatMessages[index - 1].fromId { return true }
-        return false
-    }
+//    private func isFirstChat(index: Int) -> Bool {
+//        print("check \(index)")
+//        if index == 0 { return true }
+//        print(chatMessages[index].fromId)
+//        print(chatMessages[index-1].fromId)
+//
+//        if chatMessages[index].fromId != chatMessages[index - 1].fromId { return true }
+//        return false
+//    }
     
     @objc private func didTapChatSendbutton() {
         guard let currentUser = currentUser, let chatUser = chatUser else { return }
@@ -185,10 +197,10 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
                   
             cell.chatLabel.text = chatMessages[indexPath.row].text
             
-            if isFirstChat(index: indexPath.row) {
-                cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
-                cell.chatDateLabel.isHidden = false
-            }
+//            if isFirstChat(index: indexPath.row) {
+//                cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
+//                cell.chatDateLabel.isHidden = false
+//            }
             
             cell.chatLabel.preferredMaxLayoutWidth = 250
             cell.selectionStyle = .none
@@ -202,9 +214,9 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             cell.chatLabel.preferredMaxLayoutWidth = 220
             cell.selectionStyle = .none
             
-            if isFirstChat(index: indexPath.row) {
-                guard let profileImageUrl = chatUser?.profileImageUrl else { return cell }
-                cell.chatUserImageView.load(url: URL(string: profileImageUrl)!)
+            if true {
+                guard let chatUserProfileImage = chatUserProfileImage else { return cell }
+                cell.chatUserImageView.image = chatUserProfileImage
                 cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
                 cell.chatUserImageView.isHidden = false
                 cell.chatDateLabel.isHidden = false
