@@ -206,7 +206,7 @@ final class FirebaseManager: NSObject {
             "text": chatText,
             "fromId": toId,
             "toId": fromId,
-            "profileImageUrl": chatUser.profileImageUrl,
+            "profileImageUrl": currentUser.profileImageUrl,
             "chatUserName": currentUser.name
         ] as [String : Any]
         
