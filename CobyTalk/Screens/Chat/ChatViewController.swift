@@ -166,11 +166,11 @@ final class ChatViewController: BaseViewController {
         }
     }
     
-    private func isFirstChat(index: Int) -> Bool {
-        if index == 0 { return true }
-        if chatMessages[index].fromId != chatMessages[index - 1].fromId { return true }
-        return false
-    }
+//    private func isFirstChat(index: Int) -> Bool {
+//        if index == 0 { return true }
+//        if chatMessages[index].fromId != chatMessages[index - 1].fromId { return true }
+//        return false
+//    }
     
     @objc private func didTapChatSendbutton() {
         guard let currentUser = currentUser, let chatUser = chatUser else { return }
@@ -209,10 +209,10 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
                   
             cell.chatLabel.text = chatMessages[indexPath.row].text
             
-            if isFirstChat(index: indexPath.row) {
-                cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
-                cell.chatDateLabel.isHidden = false
-            }
+//            if isFirstChat(index: indexPath.row) {
+//                cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
+//                cell.chatDateLabel.isHidden = false
+//            }
             
             cell.chatLabel.preferredMaxLayoutWidth = 250
             cell.selectionStyle = .none
@@ -226,13 +226,16 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             cell.chatLabel.preferredMaxLayoutWidth = 220
             cell.selectionStyle = .none
             
-            if isFirstChat(index: indexPath.row) {
-                guard let chatUserProfileImage = chatUserProfileImage else { return cell }
-                cell.chatUserImageView.image = chatUserProfileImage
-                cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
-                cell.chatUserImageView.isHidden = false
-                cell.chatDateLabel.isHidden = false
-            }
+//            if isFirstChat(index: indexPath.row) {
+//                guard let chatUserProfileImage = chatUserProfileImage else { return cell }
+//                cell.chatUserImageView.image = chatUserProfileImage
+//                cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
+//                cell.chatUserImageView.isHidden = false
+//                cell.chatDateLabel.isHidden = false
+//            }
+            
+            guard let profileImageUrl = chatUser?.profileImageUrl else { return cell }
+            cell.chatUserImageView.load(url: URL(string: profileImageUrl)!)
             
             return cell
         }
