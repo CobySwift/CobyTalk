@@ -64,11 +64,7 @@ final class ChatViewController: BaseViewController {
         
         chatSendView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(10)
-            if #available(iOS 15.0, *) {
-                $0.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-5)
-            } else {
-                // Fallback on earlier versions
-            }
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(5)
         }
         
         chatTableView.snp.makeConstraints {
@@ -191,10 +187,22 @@ final class ChatViewController: BaseViewController {
     }
     
     @objc override func keyboardWillShow(notification: NSNotification) {
-        scrollToBottom()
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            chatSendView.snp.remakeConstraints {
+                $0.leading.trailing.equalToSuperview().inset(10)
+                $0.bottom.equalToSuperview().inset(keyboardSize.height + 5)
+            }
+            
+            scrollToBottom()
+        }
     }
 
     @objc override func keyboardWillHide(notification: NSNotification) {
+        chatSendView.snp.remakeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(10)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(5)
+        }
+        
         scrollToBottom()
     }
     
