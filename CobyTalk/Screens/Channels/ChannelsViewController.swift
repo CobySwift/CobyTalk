@@ -65,7 +65,7 @@ final class ChannelsViewController: BaseViewController {
             .collection("recentMessages")
             .document(uid)
             .collection("messages")
-            .order(by: "timestamp")
+            .order(by: "timestamp", descending: true)
         
         firestoreListener = firestoreReference.addSnapshotListener { [weak self] querySnapshot, error in
             guard let self = self else { return }
