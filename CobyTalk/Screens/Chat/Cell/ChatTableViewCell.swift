@@ -24,7 +24,7 @@ final class ChatTableViewCell: BaseTableViewCell {
         $0.font = UIFont.systemFont(ofSize: 11)
     }
     
-    var chatLastLabel = PaddingLabel().then {
+    var chatLabel = PaddingLabel().then {
         $0.numberOfLines = 0
         $0.textColor = .white
         $0.font = UIFont.systemFont(ofSize: 15)
@@ -37,7 +37,12 @@ final class ChatTableViewCell: BaseTableViewCell {
     // MARK: - func
     
     override func render() {
-        contentView.addSubviews(chatUserImageView, chatLastLabel, chatDateLabel)
+        contentView.addSubviews(chatUserImageView, chatLabel, chatDateLabel)
+        
+        contentView.snp.makeConstraints {
+            $0.width.equalTo(UIScreen.main.bounds.size.width)
+            $0.bottom.equalTo(chatLabel.snp.bottom)
+        }
         
         chatUserImageView.snp.makeConstraints {
             $0.width.height.equalTo(30)
@@ -45,18 +50,13 @@ final class ChatTableViewCell: BaseTableViewCell {
             $0.top.equalToSuperview().inset(8)
         }
         
-        chatLastLabel.snp.makeConstraints {
+        chatLabel.snp.makeConstraints {
             $0.leading.equalTo(chatUserImageView.snp.trailing).offset(10)
             $0.top.equalToSuperview().inset(5)
         }
         
-        contentView.snp.makeConstraints {
-            $0.width.equalTo(UIScreen.main.bounds.size.width)
-            $0.bottom.equalTo(chatLastLabel.snp.bottom)
-        }
-        
         chatDateLabel.snp.makeConstraints {
-            $0.leading.equalTo(chatLastLabel.snp.trailing).offset(10)
+            $0.leading.equalTo(chatLabel.snp.trailing).offset(10)
             $0.top.equalToSuperview().inset(5)
         }
     }

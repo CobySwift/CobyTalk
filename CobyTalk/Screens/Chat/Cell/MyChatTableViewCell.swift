@@ -24,7 +24,7 @@ final class MyChatTableViewCell: BaseTableViewCell {
         $0.font = UIFont.systemFont(ofSize: 11)
     }
     
-    var chatLastLabel = PaddingLabel().then {
+    var chatLabel = PaddingLabel().then {
         $0.numberOfLines = 0
         $0.textColor = .white
         $0.font = UIFont.systemFont(ofSize: 15)
@@ -37,20 +37,20 @@ final class MyChatTableViewCell: BaseTableViewCell {
     // MARK: - func
     
     override func render() {
-        contentView.addSubviews(chatLastLabel, chatDateLabel)
+        contentView.addSubviews(chatLabel, chatDateLabel)
         
-        chatLastLabel.snp.makeConstraints {
+        contentView.snp.makeConstraints {
+            $0.width.equalTo(UIScreen.main.bounds.size.width)
+            $0.height.equalTo(100)
+        }
+        
+        chatLabel.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(20)
             $0.top.equalToSuperview().inset(5)
         }
         
-        contentView.snp.makeConstraints {
-            $0.width.equalTo(UIScreen.main.bounds.size.width)
-            $0.bottom.equalTo(chatLastLabel.snp.bottom)
-        }
-        
         chatDateLabel.snp.makeConstraints {
-            $0.trailing.equalTo(chatLastLabel.snp.leading).offset(10)
+            $0.trailing.equalTo(chatLabel.snp.leading).offset(10)
             $0.top.equalToSuperview().inset(5)
         }
     }

@@ -177,7 +177,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
         if chatMessages[indexPath.row].fromId == fromId {
             let cell = tableView.dequeueReusableCell(withIdentifier: MyChatTableViewCell.className, for: indexPath) as! MyChatTableViewCell
                   
-            cell.chatLastLabel.text = chatMessages[indexPath.row].text
+            cell.chatLabel.text = chatMessages[indexPath.row].text
             cell.selectionStyle = .none
             
             return cell
@@ -186,7 +186,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             
             guard let chatUser = chatUser else { return cell }                  
             cell.chatUserImageView.load(url: URL(string: chatUser.profileImageUrl)!)
-            cell.chatLastLabel.text = chatMessages[indexPath.row].text
+            cell.chatLabel.text = chatMessages[indexPath.row].text
             cell.selectionStyle = .none
             
             return cell
