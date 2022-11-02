@@ -61,8 +61,8 @@ final class ChatViewController: BaseViewController {
         view.addSubviews(chatSendView, chatTableView)
         
         chatSendView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            $0.leading.trailing.equalToSuperview().inset(10)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(5)
         }
         
         chatTableView.snp.makeConstraints {
@@ -166,15 +166,11 @@ final class ChatViewController: BaseViewController {
         }
     }
     
-//    private func isFirstChat(index: Int) -> Bool {
-//        print("check \(index)")
-//        if index == 0 { return true }
-//        print(chatMessages[index].fromId)
-//        print(chatMessages[index-1].fromId)
-//
-//        if chatMessages[index].fromId != chatMessages[index - 1].fromId { return true }
-//        return false
-//    }
+    private func isFirstChat(index: Int) -> Bool {
+        if index == 0 { return true }
+        if chatMessages[index].fromId != chatMessages[index - 1].fromId { return true }
+        return false
+    }
     
     @objc private func didTapChatSendbutton() {
         guard let currentUser = currentUser, let chatUser = chatUser else { return }
@@ -183,6 +179,20 @@ final class ChatViewController: BaseViewController {
         FirebaseManager.shared.createChatMessage(currentUser: currentUser, chatUser: chatUser, chatText: chatText)
         PushNotificationSender().sendPushNotification(to: chatUser.token, title: currentUser.name, body: chatText)
         chatSendView.chatTextField.text = ""
+    }
+    
+    @objc override func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    @objc override func keyboardWillHide(notification: NSNotification) {
+        if view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
 }
 
@@ -197,10 +207,10 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
                   
             cell.chatLabel.text = chatMessages[indexPath.row].text
             
-//            if isFirstChat(index: indexPath.row) {
-//                cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
-//                cell.chatDateLabel.isHidden = false
-//            }
+            if isFirstChat(index: indexPath.row) {
+                cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
+                cell.chatDateLabel.isHidden = false
+            }
             
             cell.chatLabel.preferredMaxLayoutWidth = 250
             cell.selectionStyle = .none
@@ -214,7 +224,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             cell.chatLabel.preferredMaxLayoutWidth = 220
             cell.selectionStyle = .none
             
-            if true {
+            if isFirstChat(index: indexPath.row) {
                 guard let chatUserProfileImage = chatUserProfileImage else { return cell }
                 cell.chatUserImageView.image = chatUserProfileImage
                 cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
