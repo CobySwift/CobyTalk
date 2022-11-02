@@ -193,6 +193,8 @@ final class ChatViewController: BaseViewController {
         if view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
+        
+        scrollToBottom()
     }
 }
 
