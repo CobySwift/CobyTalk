@@ -51,7 +51,8 @@ final class ChatSendView: UIView {
         }
         
         chatTextField.snp.makeConstraints {
-            $0.top.bottom.leading.trailing.equalToSuperview()
+            $0.top.bottom.leading.equalToSuperview()
+            $0.trailing.equalTo(chatSendbutton.snp.leading)
         }
         
         chatSendbutton.snp.makeConstraints {
