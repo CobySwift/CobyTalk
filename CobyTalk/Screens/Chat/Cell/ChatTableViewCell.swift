@@ -31,7 +31,6 @@ final class ChatTableViewCell: BaseTableViewCell {
         $0.backgroundColor = .mainBlue
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
-        $0.preferredMaxLayoutWidth = 250
     }
     
     // MARK: - func

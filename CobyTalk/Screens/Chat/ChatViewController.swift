@@ -178,7 +178,10 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: MyChatTableViewCell.className, for: indexPath) as! MyChatTableViewCell
                   
             cell.chatLabel.text = chatMessages[indexPath.row].text
+            
+            cell.chatLabel.preferredMaxLayoutWidth = 250
             cell.selectionStyle = .none
+            
             
             return cell
         } else {
@@ -187,6 +190,8 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             guard let chatUser = chatUser else { return cell }                  
             cell.chatUserImageView.load(url: URL(string: chatUser.profileImageUrl)!)
             cell.chatLabel.text = chatMessages[indexPath.row].text
+            
+            cell.chatLabel.preferredMaxLayoutWidth = 250
             cell.selectionStyle = .none
             
             return cell
