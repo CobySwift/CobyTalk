@@ -69,7 +69,7 @@ final class FirebaseManager: NSObject {
             let appDelegate = await UIApplication.shared.delegate as! AppDelegate
             let userToken = await appDelegate.userToken
             let userData = ["email": email, "uid": uid, "name": name, "profileImageUrl": profileImageUrl, "token": userToken]
-        
+            
             try await firestore.collection("users").document(uid).setData(userData)
         } catch {
             print("Store User error")
@@ -187,7 +187,7 @@ final class FirebaseManager: NSObject {
             "profileImageUrl": chatUser.profileImageUrl,
             "chatUserName": chatUser.name
         ] as [String : Any]
-   
+        
         document.setData(data) { error in
             if let error = error {
                 print("Failed to save recent message: \(error)")
@@ -215,6 +215,19 @@ final class FirebaseManager: NSObject {
                 print("Failed to save recent message: \(error)")
                 return
             }
+        }
+    }
+    
+    func downloadImage(at imageUrl: String, completion: @escaping (UIImage?) -> Void) {
+        let ref = Storage.storage().reference(forURL: imageUrl)
+        let megaByte = Int64(1 * 1024 * 1024)
+        
+        ref.getData(maxSize: megaByte) { data, _ in
+            guard let imageData = data else {
+                completion(nil)
+                return
+            }
+            completion(UIImage(data: imageData))
         }
     }
 }

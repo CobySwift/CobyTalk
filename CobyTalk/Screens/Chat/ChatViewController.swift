@@ -77,9 +77,22 @@ final class ChatViewController: BaseViewController {
         Task { [weak self] in
             self?.currentUser = await FirebaseManager.shared.getUser()
             self?.chatUser = await FirebaseManager.shared.getUserWithId(id: toId)
+            getChatUserProfileImage()
         }
-        
         getChatMessages()
+    }
+    
+    private func getChatUserProfileImage() {
+        DispatchQueue.global().async { [weak self] in
+            if let chatUser = self?.chatUser {
+                let imageUrl = chatUser.profileImageUrl
+                
+                FirebaseManager.shared.downloadImage(at: imageUrl) { image in
+                    guard let image = image else { return }
+                    self?.chatUserProfileImage = image
+                }
+            }
+        }
     }
     
     private func getChatMessages() {
@@ -249,9 +262,12 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
 //                cell.chatDateLabel.isHidden = false
 //            }
             
-            guard let profileImageUrl = chatUser?.profileImageUrl else { return cell }
-            cell.chatUserImageView.load(url: URL(string: profileImageUrl)!)
-            cell.chatUserImageView.isHidden = false
+            if let image = chatUserProfileImage {
+                DispatchQueue.main.async {
+                    cell.chatUserImageView.image = image
+                    cell.chatUserImageView.isHidden = false
+                }
+            }
             
             return cell
         }
