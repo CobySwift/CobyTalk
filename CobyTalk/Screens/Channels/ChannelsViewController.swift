@@ -163,8 +163,10 @@ extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.chatUserImageView.load(url: URL(string: recentMessages[indexPath.row].profileImageUrl)!)
         cell.chatUserNameLabel.text = recentMessages[indexPath.row].chatUserName
-        cell.chatLastLabel.text = recentMessages[indexPath.row].text
         cell.chatDateLabel.text = recentMessages[indexPath.row].timeAgo
+        
+        let chatLastText = recentMessages[indexPath.row].text
+        cell.chatLastLabel.text = chatLastText.count > 15 ? "\(chatLastText.hasPrefix(15))..." : chatLastText
         
         return cell
     }

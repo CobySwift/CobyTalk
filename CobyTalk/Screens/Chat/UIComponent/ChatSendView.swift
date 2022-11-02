@@ -14,19 +14,23 @@ final class ChatSendView: UIView {
     
     // MARK: - Property
     
-    let chatTextField = UITextField().then {
-        let attributes = [
-            NSAttributedString.Key.foregroundColor : UIColor.mainBlack,
-            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17, weight: .regular)
-        ]
-        
+    let chatTextField = UITextView().then {
+        $0.font = UIFont.systemFont(ofSize: 17.0)
+        $0.textColor = UIColor.mainBlack
+        $0.textAlignment = NSTextAlignment.left
+        $0.dataDetectorTypes = UIDataDetectorTypes.all
+        $0.isEditable = true
         $0.autocapitalizationType = .none
-        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
-        $0.leftViewMode = .always
-        $0.clipsToBounds = false
+        $0.isScrollEnabled = false
+        $0.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 5)
     }
     
-    let chatSendbutton = SendButton()
+    let chatSendbutton = SendButton().then {
+        $0.tintColor = .white
+        $0.backgroundColor = .mainBlack
+        $0.layer.cornerRadius = 20
+        $0.layer.masksToBounds = true
+    }
     
     // MARK: - init
 
@@ -47,7 +51,7 @@ final class ChatSendView: UIView {
         
         self.snp.makeConstraints {
             $0.width.equalTo(UIScreen.main.bounds.size.width)
-            $0.height.equalTo(40)
+            $0.bottom.equalTo(chatTextField.snp.bottom)
         }
         
         chatTextField.snp.makeConstraints {
@@ -56,14 +60,15 @@ final class ChatSendView: UIView {
         }
         
         chatSendbutton.snp.makeConstraints {
-            $0.width.equalTo(40)
-            $0.top.bottom.trailing.equalToSuperview()
+            $0.width.height.equalTo(30)
+            $0.trailing.equalToSuperview()
+            $0.bottom.trailing.equalToSuperview().inset(5)
         }
     }
     
     private func configUI() {
         self.layer.borderWidth = 0.3
         self.layer.borderColor = UIColor.mainGray.cgColor
-        self.layer.cornerRadius = 20
+        self.layer.cornerRadius = 15
     }
 }
