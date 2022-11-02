@@ -20,6 +20,7 @@ final class SignUpViewController: BaseViewController {
     
     private lazy var photoImageView = UIImageView().then {
         $0.image = ImageLiteral.btnProfile
+        $0.tintColor = .mainGray
         $0.layer.cornerRadius = 40
         $0.clipsToBounds = true
         
@@ -81,7 +82,7 @@ final class SignUpViewController: BaseViewController {
     private lazy var signUpButton = UIButton().then {
         $0.backgroundColor = .mainBlack
         $0.setTitleColor(.white, for: .normal)
-        $0.setTitle("Start", for: .normal)
+        $0.setTitle("완료", for: .normal)
         $0.layer.cornerRadius = 12
         $0.addTarget(self, action: #selector(didTapSignUpButton), for: .touchUpInside)
     }
@@ -133,7 +134,7 @@ final class SignUpViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
-        title = "Sign Up"
+        title = "회원가입"
     }
     
     
@@ -154,11 +155,11 @@ final class SignUpViewController: BaseViewController {
         Task {
             await FirebaseManager.shared.createNewAccount(email: email, password: password)
             await FirebaseManager.shared.storeUserInformation(email: email, name: name, profileImage: profileImage)
+            
+            let navigationController = UINavigationController(rootViewController: ChannelsViewController())
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
         }
-        
-        let navigationController = UINavigationController(rootViewController: ChannelsViewController())
-        navigationController.modalPresentationStyle = .fullScreen
-        self.present(navigationController, animated: true, completion: nil)
     }
 }
 

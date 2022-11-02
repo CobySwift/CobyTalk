@@ -55,14 +55,14 @@ final class LogInViewController: BaseViewController {
     private lazy var logInbutton = UIButton().then {
         $0.backgroundColor = .mainBlack
         $0.setTitleColor(.white, for: .normal)
-        $0.setTitle("Log In", for: .normal)
+        $0.setTitle("로그인", for: .normal)
         $0.addTarget(self, action: #selector(didTapLogInbutton), for: .touchUpInside)
     }
         
     private lazy var signUpButton = UIButton().then {
         $0.backgroundColor = .mainBlack
         $0.setTitleColor(.white, for: .normal)
-        $0.setTitle("Sign Up", for: .normal)
+        $0.setTitle("회원가입", for: .normal)
         $0.addTarget(self, action: #selector(didTapSignUpButton), for: .touchUpInside)
     }
     
@@ -71,6 +71,7 @@ final class LogInViewController: BaseViewController {
         $0.text = "Failed to Log In"
         $0.font = .systemFont(ofSize: 24, weight: .semibold)
         $0.textColor = .mainBlack
+        $0.isHidden = true
     }
     
     override func viewDidLoad() {
@@ -86,8 +87,6 @@ final class LogInViewController: BaseViewController {
     
     override func render() {
         view.addSubviews(loginLabel, emailField, passwordField, logInbutton, signUpButton, logInErrorLabel)
-        
-        logInErrorLabel.isHidden = true
         
         loginLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
@@ -132,22 +131,22 @@ final class LogInViewController: BaseViewController {
     @objc private func didTapLogInbutton() {
         guard let email = emailField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty else {
-            logInErrorLabel.isHidden = false
             print("Missing field data")
+            logInErrorLabel.isHidden = false
             return
         }
         
-        Task { [weak self] in
-            guard let userId = await FirebaseManager.shared.signInUser(email: email, password: password) else {
-                self?.logInErrorLabel.isHidden = false
-                return
+        Task {
+            if let uid = await FirebaseManager.shared.signInUser(email: email, password: password) {
+                await FirebaseManager.shared.updateUserToken(uid: uid)
+                
+                let navigationController = UINavigationController(rootViewController: ChannelsViewController())
+                navigationController.modalPresentationStyle = .fullScreen
+                self.present(navigationController, animated: true, completion: nil)
             }
-            await FirebaseManager.shared.updateUserToken(uid: userId)
         }
         
-        let navigationController = UINavigationController(rootViewController: ChannelsViewController())
-        navigationController.modalPresentationStyle = .fullScreen
-        self.present(navigationController, animated: true, completion: nil)
+        logInErrorLabel.isHidden = false
     }
     
     @objc private func didTapSignUpButton() {

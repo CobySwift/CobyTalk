@@ -32,10 +32,6 @@ final class ChannelsViewController: BaseViewController {
         $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
-    private lazy var addButton = AddButton().then {
-        $0.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
-    }
-    
     // MARK: - func
     
     override func render() {
@@ -51,13 +47,13 @@ final class ChannelsViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
 
-        let signOut = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOut))
-        let addButton = makeBarButtonItem(with: addButton)
+        let signOut = UIBarButtonItem(title: "로그아웃", style: .plain, target: self, action: #selector(signOut))
+        let newChannel = UIBarButtonItem(title: "친구찾기", style: .plain, target: self, action: #selector(didTapAddButton))
 
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .automatic
         navigationItem.leftBarButtonItem = signOut
-        navigationItem.rightBarButtonItem = addButton
+        navigationItem.rightBarButtonItem = newChannel
         
         title = "메세지"
     }
