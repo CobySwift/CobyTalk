@@ -56,7 +56,7 @@ final class ChatTableViewCell: BaseTableViewCell {
         
         chatDateLabel.snp.makeConstraints {
             $0.leading.equalTo(chatLabel.snp.trailing).offset(10)
-            $0.top.equalToSuperview().inset(5)
+            $0.top.equalToSuperview().inset(10)
         }
     }
 }

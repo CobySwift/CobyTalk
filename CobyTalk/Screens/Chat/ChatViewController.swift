@@ -158,6 +158,12 @@ final class ChatViewController: BaseViewController {
         }
     }
     
+    private func isFirstChat(index: Int) -> Bool {
+        if index == 0 { return true }
+        if chatMessages[index].fromId != chatMessages[index - 1].fromId { return true }
+        return false
+    }
+    
     @objc private func didTapChatSendbutton() {
         guard let currentUser = currentUser, let chatUser = chatUser else { return }
         guard chatSendView.chatTextField.text != "", let chatText = chatSendView.chatTextField.text else { return }
@@ -179,9 +185,12 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
                   
             cell.chatLabel.text = chatMessages[indexPath.row].text
             
+            if isFirstChat(index: indexPath.row) {
+                cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
+            }
+            
             cell.chatLabel.preferredMaxLayoutWidth = 250
             cell.selectionStyle = .none
-            
             
             return cell
         } else {
@@ -189,11 +198,14 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             
             cell.chatLabel.text = chatMessages[indexPath.row].text
             
-            cell.chatLabel.preferredMaxLayoutWidth = 250
+            cell.chatLabel.preferredMaxLayoutWidth = 220
             cell.selectionStyle = .none
             
-            guard let profileImageUrl = chatUser?.profileImageUrl else { return cell }
-            cell.chatUserImageView.load(url: URL(string: profileImageUrl)!)
+            if isFirstChat(index: indexPath.row) {
+                guard let profileImageUrl = chatUser?.profileImageUrl else { return cell }
+                cell.chatUserImageView.load(url: URL(string: profileImageUrl)!)
+                cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
+            }
             
             return cell
         }
