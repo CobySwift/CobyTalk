@@ -187,6 +187,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             
             if isFirstChat(index: indexPath.row) {
                 cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
+                cell.chatDateLabel.isHidden = false
             }
             
             cell.chatLabel.preferredMaxLayoutWidth = 250
@@ -205,6 +206,8 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
                 guard let profileImageUrl = chatUser?.profileImageUrl else { return cell }
                 cell.chatUserImageView.load(url: URL(string: profileImageUrl)!)
                 cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
+                cell.chatUserImageView.isHidden = false
+                cell.chatDateLabel.isHidden = false
             }
             
             return cell

@@ -22,6 +22,7 @@ final class MyChatTableViewCell: BaseTableViewCell {
     var chatDateLabel = UILabel().then {
         $0.textColor = .mainGray
         $0.font = UIFont.systemFont(ofSize: 11)
+        $0.isHidden = true
     }
     
     var chatLabel = PaddingLabel().then {

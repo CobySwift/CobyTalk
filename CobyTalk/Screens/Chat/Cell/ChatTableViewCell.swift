@@ -17,11 +17,13 @@ final class ChatTableViewCell: BaseTableViewCell {
     var chatUserImageView = UIImageView().then {
         $0.layer.cornerRadius = 15
         $0.layer.masksToBounds = true
+        $0.isHidden = true
     }
     
     var chatDateLabel = UILabel().then {
         $0.textColor = .mainGray
         $0.font = UIFont.systemFont(ofSize: 11)
+        $0.isHidden = true
     }
     
     var chatLabel = PaddingLabel().then {
