@@ -244,7 +244,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             
             guard let profileImageUrl = chatUser?.profileImageUrl else { return cell }
             cell.chatUserImageView.load(url: URL(string: profileImageUrl)!)
-            cell.chatUserImageView.isHidden = true
+            cell.chatUserImageView.isHidden = false
             
             return cell
         }
