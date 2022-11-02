@@ -28,7 +28,7 @@ final class ChatSendView: UIView {
     let chatSendbutton = SendButton().then {
         $0.tintColor = .white
         $0.backgroundColor = .mainBlack
-        $0.layer.cornerRadius = 20
+        $0.layer.cornerRadius = 15
         $0.layer.masksToBounds = true
     }
     
@@ -69,6 +69,6 @@ final class ChatSendView: UIView {
     private func configUI() {
         self.layer.borderWidth = 0.3
         self.layer.borderColor = UIColor.mainGray.cgColor
-        self.layer.cornerRadius = 15
+        self.layer.cornerRadius = 20
     }
 }
