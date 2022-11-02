@@ -41,7 +41,7 @@ final class MyChatTableViewCell: BaseTableViewCell {
         
         contentView.snp.makeConstraints {
             $0.width.equalTo(UIScreen.main.bounds.size.width)
-            $0.height.equalTo(100)
+            $0.bottom.equalTo(chatLabel.snp.bottom)
         }
         
         chatLabel.snp.makeConstraints {
