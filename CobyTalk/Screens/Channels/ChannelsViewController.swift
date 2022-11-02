@@ -166,7 +166,8 @@ extension ChannelsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.chatDateLabel.text = recentMessages[indexPath.row].timeAgo
         
         let chatLastText = recentMessages[indexPath.row].text
-        cell.chatLastLabel.text = chatLastText.count > 15 ? "\(chatLastText.hasPrefix(15))..." : chatLastText
+        cell.chatLastLabel.text = chatLastText.count > 15 ?
+        "\(chatLastText.index(chatLastText.startIndex, offsetBy: 15))..." : chatLastText
         
         return cell
     }
