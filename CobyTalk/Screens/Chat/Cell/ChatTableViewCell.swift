@@ -14,34 +14,30 @@ final class ChatTableViewCell: BaseTableViewCell {
     
     // MARK: - property
     
-    lazy var chatUserImageView = UIImageView().then {
+    var chatUserImageView = UIImageView().then {
         $0.layer.cornerRadius = 15
         $0.layer.masksToBounds = true
     }
     
-    lazy var chatDateLabel = UILabel().then {
+    var chatDateLabel = UILabel().then {
         $0.textColor = .mainGray
         $0.font = UIFont.systemFont(ofSize: 11)
     }
     
-    lazy var chatLastLabel = PaddingLabel().then {
+    var chatLastLabel = PaddingLabel().then {
         $0.numberOfLines = 0
         $0.textColor = .white
         $0.font = UIFont.systemFont(ofSize: 15)
         $0.backgroundColor = .mainBlue
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
+        $0.preferredMaxLayoutWidth = 250
     }
     
     // MARK: - func
     
     override func render() {
         contentView.addSubviews(chatUserImageView, chatLastLabel, chatDateLabel)
-        
-        contentView.snp.makeConstraints {
-            $0.width.equalTo(UIScreen.main.bounds.size.width)
-            $0.height.equalTo(chatLastLabel.snp.height).offset(10)
-        }
         
         chatUserImageView.snp.makeConstraints {
             $0.width.height.equalTo(30)
@@ -52,7 +48,11 @@ final class ChatTableViewCell: BaseTableViewCell {
         chatLastLabel.snp.makeConstraints {
             $0.leading.equalTo(chatUserImageView.snp.trailing).offset(10)
             $0.top.equalToSuperview().inset(5)
-            $0.width.lessThanOrEqualTo(250)
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.width.equalTo(UIScreen.main.bounds.size.width)
+            $0.bottom.equalTo(chatLastLabel.snp.bottom)
         }
         
         chatDateLabel.snp.makeConstraints {
