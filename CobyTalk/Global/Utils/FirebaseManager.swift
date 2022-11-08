@@ -219,7 +219,7 @@ final class FirebaseManager: NSObject {
     }
     
     func downloadImage(at imageUrl: String, completion: @escaping (UIImage?) -> Void) {
-        let ref = Storage.storage().reference(forURL: imageUrl)
+        let ref = storage.reference(forURL: imageUrl)
         let megaByte = Int64(1 * 1024 * 1024)
         
         ref.getData(maxSize: megaByte) { data, _ in

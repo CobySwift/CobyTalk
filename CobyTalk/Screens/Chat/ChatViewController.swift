@@ -117,29 +117,18 @@ final class ChatViewController: BaseViewController {
     
     private func addChatMessageToTable(_ chatMessage: ChatMessage) {
         let docId = chatMessage.id
-        if chatMessages.contains(where: { rm in
-            return rm.id == docId
-        }) {
-            return
-        }
         
+        if chatMessages.contains(where: { $0.id == docId }) { return }
         chatMessages.append(chatMessage)
         
-        guard let index = chatMessages.firstIndex(where: { rm in
-            return rm.id == docId
-        }) else {
-            return
-        }
+        guard let index = chatMessages.firstIndex(where: { $0.id == docId }) else { return }
+        
         chatTableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
     }
     
     private func updateChatMessageInTable(_ chatMessage: ChatMessage) {
         let docId = chatMessage.id
-        guard let index = chatMessages.firstIndex(where: { rm in
-            return rm.id == docId
-        }) else {
-            return
-        }
+        guard let index = chatMessages.firstIndex(where: { $0.id == docId }) else { return }
         
         chatMessages[index] = chatMessage
         chatTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
@@ -147,11 +136,7 @@ final class ChatViewController: BaseViewController {
     
     private func removeChatMessageFromTable(_ chatMessage: ChatMessage) {
         let docId = chatMessage.id
-        guard let index = chatMessages.firstIndex(where: { rm in
-            return rm.id == docId
-        }) else {
-            return
-        }
+        guard let index = chatMessages.firstIndex(where: { $0.id == docId }) else { return }
         
         chatMessages.remove(at: index)
         chatTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
@@ -183,12 +168,6 @@ final class ChatViewController: BaseViewController {
             }
         }
     }
-    
-//    private func isFirstChat(index: Int) -> Bool {
-//        if index == 0 { return true }
-//        if chatMessages[index].fromId != chatMessages[index - 1].fromId { return true }
-//        return false
-//    }
     
     @objc private func didTapChatSendbutton() {
         guard let currentUser = currentUser, let chatUser = chatUser else { return }
@@ -236,12 +215,6 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: MyChatTableViewCell.className, for: indexPath) as! MyChatTableViewCell
                   
             cell.chatLabel.text = chatMessages[indexPath.row].text
-            
-//            if isFirstChat(index: indexPath.row) {
-//                cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
-//                cell.chatDateLabel.isHidden = false
-//            }
-            
             cell.chatLabel.preferredMaxLayoutWidth = 250
             cell.selectionStyle = .none
             
@@ -250,17 +223,8 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.className, for: indexPath) as! ChatTableViewCell
             
             cell.chatLabel.text = chatMessages[indexPath.row].text
-            
             cell.chatLabel.preferredMaxLayoutWidth = 220
             cell.selectionStyle = .none
-            
-//            if isFirstChat(index: indexPath.row) {
-//                guard let chatUserProfileImage = chatUserProfileImage else { return cell }
-//                cell.chatUserImageView.image = chatUserProfileImage
-//                cell.chatDateLabel.text = chatMessages[indexPath.row].timeAgo
-//                cell.chatUserImageView.isHidden = false
-//                cell.chatDateLabel.isHidden = false
-//            }
             
             if let image = chatUserProfileImage {
                 DispatchQueue.main.async {
