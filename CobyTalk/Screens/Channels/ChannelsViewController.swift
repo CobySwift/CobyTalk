@@ -46,6 +46,14 @@ final class ChannelsViewController: BaseViewController {
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
+
+        let signOut = UIBarButtonItem(title: "로그아웃", style: .plain, target: self, action: #selector(signOut))
+        let newChannel = UIBarButtonItem(title: "친구찾기", style: .plain, target: self, action: #selector(didTapAddButton))
+
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .automatic
+        navigationItem.leftBarButtonItem = signOut
+        navigationItem.rightBarButtonItem = newChannel
         
         title = "메세지"
     }
@@ -120,6 +128,11 @@ final class ChannelsViewController: BaseViewController {
         let navigationController = UINavigationController(rootViewController: LogInViewController())
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
+    }
+    
+    @objc private func didTapAddButton() {
+        let viewController = FriendsViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
